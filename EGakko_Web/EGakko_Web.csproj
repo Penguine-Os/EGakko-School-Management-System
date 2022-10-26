@@ -29,4 +29,8 @@
     <ProjectReference Include="..\EGakko_Models\EGakko_Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\NewFolder\" />
+  </ItemGroup>
+
 </Project>
