@@ -34,5 +34,7 @@ namespace EGakko_Models
 
         [PersonalData]
         public DateTime? BirthDate { get; set; }
+
+     //   public Gender Gender { get; set; }
     }
 }
