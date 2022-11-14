@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EGakko_Models
 {
@@ -11,7 +12,8 @@ namespace EGakko_Models
 
 
         // Navigational Properties
-        public string CustomUserId { get; set; }
+        public string CustomUserIdTeacher { get; set; }
+        [ForeignKey("CustomUserIdTeacher")]
         public CustomUser CustomUserTeacher { get; set; }
 
         public List<Attendance> ListOfAttendance { get; set; }

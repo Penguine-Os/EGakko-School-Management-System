@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EGakko_Models
 {
@@ -11,10 +12,12 @@ namespace EGakko_Models
         public string GradeLevel{ get; set; }
 
         // Navigational Properties
-        public string CustomUserId { get; set; }
+        public string CustomUserIdStudent { get; set; }
+        [ForeignKey("CustomUserIdStudent")]
         public CustomUser CustomUserStudent { get; set; }
 
         public int FieldId { get; set; }
+        [ForeignKey("FieldId")]
         public StudyField Field { get; set; }
 
         public List<Score> Results { get; set; }
