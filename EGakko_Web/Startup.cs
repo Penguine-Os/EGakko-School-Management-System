@@ -71,7 +71,11 @@ namespace EGakko_Web
 
             IdentityResult result;
 
-            bool rolecheck = await roleManager.RoleExistsAsync("admin");
+            bool rolecheck  = await roleManager.RoleExistsAsync("defaultUser");
+            if (!rolecheck)
+                result = await roleManager.CreateAsync(new IdentityRole("defaultUser"));
+
+            rolecheck = await roleManager.RoleExistsAsync("admin");
             if (!rolecheck)
                 result = await roleManager.CreateAsync(new IdentityRole("admin"));
 
@@ -79,10 +83,13 @@ namespace EGakko_Web
             if (!rolecheck)
                 result = await roleManager.CreateAsync(new IdentityRole("teacher"));
 
+
             rolecheck = await roleManager.RoleExistsAsync("student");
             if (!rolecheck)
                 result = await roleManager.CreateAsync(new IdentityRole("student"));
 
+
+         
             context.SaveChanges();
         }
     }

@@ -1,40 +1,65 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Hosting
+@using Microsoft.AspNetCore.Mvc.ViewEngines
+@inject IWebHostEnvironment Environment
+@inject ICompositeViewEngine Engine 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - EGakko_Web</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css"/>
-    <link rel="stylesheet" href="~/css/site.css"/>
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/StyleSheet_LUX.css" asp-append-version="true" />
+    
+    <link rel="stylesheet" href="~/css/Site.css" />
 
     <!-- Google fonts-->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,600;1,600&amp;display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,500;0,600;0,700;1,300;1,500;1,600;1,700&amp;display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet" />
-
+  
 
 </head>
-<body>
+<body class="bg-body">
+
+
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">EGakko_Web</a>
+                <a class="navbar-brand ms-4" asp-area="" asp-controller="Home" asp-action="Index"><img class="navbarLogo" src="~/assets/images/logo-color.png" /></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav ms-auto flex-nowrap">
+                       
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index">Fields</a>
                         </li>
                         <li class="nav-item">
-                       <partial name="_LoginPartial" />
+                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index">Teachers</a>
                         </li>
+                        @{
+                            var result = Engine.FindView(ViewContext, "_LoginPartial", isMainPage: false);
+                        }
+                        @if (result.Success)
+                        {
+                            <partial name="_LoginPartial" />
+                        }
+                        else
+                        {
+                            throw new InvalidOperationException("The default Identity UI layout requires a partial view '_LoginPartial' " +
+                            "usually located at '/Pages/_LoginPartial' or at '/Views/Shared/_LoginPartial' to work. Based on your configuration " +
+                            $"we have looked at it in the following locations: {System.Environment.NewLine}{string.Join(System.Environment.NewLine, result.SearchedLocations)}.");
+                        }
+
+                     
+                        
                     </ul>
                 </div>
             </div>

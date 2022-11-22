@@ -18,9 +18,9 @@
 
                 <div class="input-group form-group ">
 
-                    <input asp-for="Input.Email" style="height: 3rem" placeholder="@nameof(Model.Input.Email)" class="form-control" autocomplete="username" aria-required="true" />
+                    <input asp-for="Input.Email" style="height: 3rem" placeholder="@nameof(Model.Input.Email)" class="form-control rounded-start" autocomplete="username" aria-required="true" />
 
-                    <div style="margin-left: -3px" class="rounded bg-transparent">
+                    <div style="margin-left: -3px" class="rounded-end bg-transparent">
                         <span class="input-group-text " style="height: 3rem;background-color: #14A479; color: white">
                             <i class="fa-regular fa-user "></i>
                         </span>
@@ -33,9 +33,9 @@
 
                 <div class="input-group form-group ">
 
-                    <input asp-for="Input.Password" style="height: 3rem" placeholder="@nameof(Model.Input.Password)" class="form-control" autocomplete="current-password" aria-required="true" />
+                    <input asp-for="Input.Password" style="height: 3rem" placeholder="@nameof(Model.Input.Password)" class="form-control rounded-start " autocomplete="current-password" aria-required="true" />
 
-                    <div style="margin-left: -3px" class="rounded bg-transparent">
+                    <div style="margin-left: -3px" class="rounded-end bg-transparent">
                         <span class="input-group-text " style="height: 3rem; background-color: #14A479; color: white">
                             <i class="fa-solid fa-unlock-keyhole"></i>
                         </span>
@@ -54,11 +54,11 @@
             </div>
             <div class="mt-5">
                 <div class="mb-5">
-                    <a class="btn btn-outline-light" id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                    <a class="btn btn-outline-light" id="forgot-password" asp-page="./ForgotPassword">Forgot password ?</a>
 
                 </div>
                 <div>
-                    <a class="btn btn-outline-light" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                    <a class="btn btn-outline-light" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register</a>
 
                 </div>
 
