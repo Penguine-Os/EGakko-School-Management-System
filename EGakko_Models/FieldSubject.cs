@@ -8,6 +8,9 @@ namespace EGakko_Models
         [Key]
         public int Id { get; set; }
 
+        public bool IsCoreSubject { get; set; }
+
+        public int HoursPerWeek { get; set; }
         // Navigational Properties
         public int FieldId { get; set; }
         [ForeignKey("FieldId")]

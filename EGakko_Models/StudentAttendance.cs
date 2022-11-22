@@ -17,8 +17,6 @@ namespace EGakko_Models
         [ForeignKey("AttendanceId")]
         public Attendance Attendance { get; set; }
 
-        public int TeacherId { get; set; }
-        [ForeignKey("TeacherId")]
-        public Teacher Teacher { get; set; }
+     
     }
 }

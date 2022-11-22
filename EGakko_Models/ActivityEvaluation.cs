@@ -8,7 +8,7 @@ namespace EGakko_Models
         [Key]
         public int Id { get; set; }
         public int MaxScore { get; set; }
-        public string Summery { get; set; }
+        public string Description { get; set; }
         public ActivityType Activity { get; set; }
 
         // Navigational Properties

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EGakko_Models
@@ -22,7 +23,7 @@ namespace EGakko_Models
 
         public int LocationId { get; set; }
         [ForeignKey("LocationId")]
-        public Location Location { get; set; }
+        public ClassRoomLocation Location { get; set; }
 
         public int FieldSubjectID { get; set; }
         [ForeignKey("FieldSubjectID")]

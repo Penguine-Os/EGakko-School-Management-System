@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System;
 namespace EGakko_Models
 {
-    public class Location
+    public class ClassRoomLocation
     {
         [Key]
         public int Id { get; set; }

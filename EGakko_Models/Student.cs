@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EGakko_Models
@@ -9,7 +11,7 @@ namespace EGakko_Models
         public int Id { get; set; }
         public DateTime EnrollmentDate { get; set; }
         public bool FeesArePayed { get; set; }
-        public string GradeLevel{ get; set; }
+      
 
         // Navigational Properties
         public string CustomUserIdStudent { get; set; }
@@ -20,7 +22,7 @@ namespace EGakko_Models
         [ForeignKey("FieldId")]
         public StudyField Field { get; set; }
 
-        public List<Score> Results { get; set; }
+        public List<Result> Results { get; set; }
 
         public List<Attendance> ListOfAttendance { get; set; }
 

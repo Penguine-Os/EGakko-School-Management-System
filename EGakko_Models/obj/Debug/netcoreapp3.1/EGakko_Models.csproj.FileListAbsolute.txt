@@ -1,0 +1,10 @@
+C:\Users\yene\source\repos\ASP.NET\Project-Webapplicaties\EGakko-Project-WebApplication\EGakko_Models\bin\Debug\netcoreapp3.1\EGakko_Models.deps.json
+C:\Users\yene\source\repos\ASP.NET\Project-Webapplicaties\EGakko-Project-WebApplication\EGakko_Models\bin\Debug\netcoreapp3.1\EGakko_Models.dll
+C:\Users\yene\source\repos\ASP.NET\Project-Webapplicaties\EGakko-Project-WebApplication\EGakko_Models\bin\Debug\netcoreapp3.1\EGakko_Models.pdb
+C:\Users\yene\source\repos\ASP.NET\Project-Webapplicaties\EGakko-Project-WebApplication\EGakko_Models\obj\Debug\netcoreapp3.1\EGakko_Models.csproj.AssemblyReference.cache
+C:\Users\yene\source\repos\ASP.NET\Project-Webapplicaties\EGakko-Project-WebApplication\EGakko_Models\obj\Debug\netcoreapp3.1\EGakko_Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\yene\source\repos\ASP.NET\Project-Webapplicaties\EGakko-Project-WebApplication\EGakko_Models\obj\Debug\netcoreapp3.1\EGakko_Models.AssemblyInfoInputs.cache
+C:\Users\yene\source\repos\ASP.NET\Project-Webapplicaties\EGakko-Project-WebApplication\EGakko_Models\obj\Debug\netcoreapp3.1\EGakko_Models.AssemblyInfo.cs
+C:\Users\yene\source\repos\ASP.NET\Project-Webapplicaties\EGakko-Project-WebApplication\EGakko_Models\obj\Debug\netcoreapp3.1\EGakko_Models.csproj.CoreCompileInputs.cache
+C:\Users\yene\source\repos\ASP.NET\Project-Webapplicaties\EGakko-Project-WebApplication\EGakko_Models\obj\Debug\netcoreapp3.1\EGakko_Models.dll
+C:\Users\yene\source\repos\ASP.NET\Project-Webapplicaties\EGakko-Project-WebApplication\EGakko_Models\obj\Debug\netcoreapp3.1\EGakko_Models.pdb

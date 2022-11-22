@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
+using System;
+using System.Collections.Generic;
 namespace EGakko_Models
 {
     public class Subject
@@ -7,9 +8,7 @@ namespace EGakko_Models
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public bool IsCoreSubject { get; set; }
-
         // Navigational Properties
-        List<StudyField> Fields { get; set; }
+        public List<StudyField> Fields { get; set; }
     }
 }
