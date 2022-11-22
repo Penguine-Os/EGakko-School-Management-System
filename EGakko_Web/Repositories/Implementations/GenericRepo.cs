@@ -1,4 +1,4 @@
-﻿using BookStore_DAL.Repositories.Interfaces;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +21,9 @@ namespace EGakko_Web.Repositories
             _dbSet = db.Set<T>();
         }
 
-        public async Task AddToDataBase(T obj)
+        public async Task Add(T obj)
         {
-           await _dbSet.AddAsync(obj);
+            await _dbSet.AddAsync(obj);
         }
 
         public IEnumerable<T> GetAll()
