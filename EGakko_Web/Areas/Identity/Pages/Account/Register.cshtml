@@ -1,0 +1,119 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "_RegisterSideBar";
+}
+
+
+<div class="row" style="width: 25rem">
+
+    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <!-- #region Email -->
+        <span asp-validation-for="Input.Email" class="text-danger"></span>
+        <div class="form-floating customBottomMargin shadow d-flex">
+
+            <div class="input-group form-group ">
+
+                <input asp-for="Input.Email" style="height: 3rem" placeholder="Email Adress" class="form-control" autocomplete="username" aria-required="true" />
+
+                <div style="margin-left: -3px" class="rounded bg-transparent">
+                    <span class="input-group-text " style="height: 3rem;background-color: #14A479; color: white">
+                        <i class="fa-solid fa-at"></i>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+        <!-- #endregion -->
+        <!-- #region first Name -->
+        <span asp-validation-for="Input.FName" class="text-danger"></span>
+        <div class="form-floating customBottomMargin shadow d-flex">
+
+            <div class="input-group form-group ">
+
+                <input asp-for="Input.FName" style="height: 3rem" placeholder="First Name" class="form-control" aria-required="true" />
+                <div style="margin-left: -3px" class="rounded bg-transparent">
+                    <span class="input-group-text " style="height: 3rem; background-color: #14A479; color: white">
+                        <i class="fa-regular fa-id-badge"></i>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+        <!-- #endregion -->
+        <!-- #region Last Name -->
+        <span asp-validation-for="Input.LName" class="text-danger"></span>
+        <div class="form-floating customBottomMargin shadow d-flex">
+
+            <div class="input-group form-group ">
+
+                <input asp-for="Input.LName" style="height: 3rem" placeholder="Last Name" class="form-control" aria-required="true" />
+                <div style="margin-left: -3px" class="rounded bg-transparent">
+                    <span class="input-group-text " style="height: 3rem; background-color: #14A479; color: white">
+                        <i class="fa-regular fa-id-badge"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- #endregion -->
+        <!-- #region Password -->
+        <span asp-validation-for="Input.Password" class="text-danger"></span>
+        <div class="form-floating customBottomMargin shadow d-flex">
+
+            <div class="input-group form-group ">
+
+                <input asp-for="Input.Password" style="height: 3rem" placeholder="New Password" class="form-control" autocomplete="new-password" aria-required="true" />
+                <div style="margin-left: -3px" class="rounded bg-transparent">
+                    <span class="input-group-text " style="height: 3rem; background-color: #14A479; color: white">
+                        <i class="fa-solid fa-unlock-keyhole"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- #endregion -->
+        <!-- #region Password-Confirm -->
+        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+        <div class="form-floating customBottomMargin shadow d-flex">
+
+            <div class="input-group form-group ">
+
+                <input asp-for="Input.ConfirmPassword" style="height: 3rem" placeholder="Confirm Password" class="form-control" autocomplete="new-password" aria-required="true" />
+                <div style="margin-left: -3px" class="rounded bg-transparent">
+                    <span class="input-group-text " style="height: 3rem; background-color: #14A479; color: white">
+                        <i class="fa-solid fa-unlock-keyhole"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- #endregion -->
+        <!-- #region gender-->
+        <span asp-validation-for="Input.Sex" class="text-danger"></span>
+        <div class="form-floating customBottomMargin shadow d-flex">
+
+            <div class="input-group form-group ">
+                @*<select asp-items="@Html.GetEnumSelectList<Gender>()"></select>*@
+                <select asp-for="Input.Sex" style="height: 3rem" asp-items="@Html.GetEnumSelectList<Gender>()" class="form-select">
+                    <option disabled selected hidden>Select Your Sex</option>
+
+                </select>
+
+            </div>
+        </div>
+        <!-- #endregion -->
+        <div class="shadow ">
+            <button id="registerSubmit" type="submit" class="w-100 btn" style="background-color: #14A479; color: white">Register</button>
+
+        </div>
+
+    </form>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

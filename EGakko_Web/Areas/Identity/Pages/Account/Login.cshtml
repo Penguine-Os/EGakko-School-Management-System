@@ -1,0 +1,78 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+    Layout = "_LogInSideBar";
+}
+
+<div class="row " style="width: 25rem">
+    <div >
+
+        <form id="account" method="post">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+            <div class="form-floating mb-5 shadow d-flex">
+
+                <div class="input-group form-group ">
+
+                    <input asp-for="Input.Email" style="height: 3rem" placeholder="@nameof(Model.Input.Email)" class="form-control" autocomplete="username" aria-required="true" />
+
+                    <div style="margin-left: -3px" class="rounded bg-transparent">
+                        <span class="input-group-text " style="height: 3rem;background-color: #14A479; color: white">
+                            <i class="fa-regular fa-user "></i>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+            <div class="form-floating mb-5 shadow d-flex">
+
+                <div class="input-group form-group ">
+
+                    <input asp-for="Input.Password" style="height: 3rem" placeholder="@nameof(Model.Input.Password)" class="form-control" autocomplete="current-password" aria-required="true" />
+
+                    <div style="margin-left: -3px" class="rounded bg-transparent">
+                        <span class="input-group-text " style="height: 3rem; background-color: #14A479; color: white">
+                            <i class="fa-solid fa-unlock-keyhole"></i>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+
+            <div class="shadow ">
+                <button id="login-submit" type="submit" class="w-100 btn" style="background-color: #14A479; color: white">Log in</button>
+            </div>
+            <div class="mt-5">
+                <div class="mb-5">
+                    <a class="btn btn-outline-light" id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+
+                </div>
+                <div>
+                    <a class="btn btn-outline-light" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+
+                </div>
+
+
+
+                @*     <p class="text-white">
+                <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                </p>*@
+            </div>
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
