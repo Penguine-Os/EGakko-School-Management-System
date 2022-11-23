@@ -51,7 +51,7 @@ namespace EGakko_Web
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             CreateRoles(serviceProvider).Wait();
