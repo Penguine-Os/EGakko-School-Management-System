@@ -1,4 +1,5 @@
 ﻿using EGakko_Models;
+using EGakko_Web.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -13,9 +14,16 @@ namespace EGakko_DAL.Data
 {
     public class ApplicationDbContext : IdentityDbContext<CustomUser>
     {
-       
+        private readonly UserManager<CustomUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
+           
+        }
+        public ApplicationDbContext()
+        {
+
         }
 
         public DbSet<Student> Students { get; set; }
@@ -49,7 +57,7 @@ namespace EGakko_DAL.Data
         {
             base.OnModelCreating(builder);
 
-           
+            builder.Seed();
 
             builder.Entity<Teacher>()
                 .Property(x => x.Salary).HasColumnType("decimal(18,4)");
@@ -57,26 +65,6 @@ namespace EGakko_DAL.Data
             builder.Entity<Result>()
                 .Property(x => x.TotalScore).HasColumnType("decimal(18,4)");
         }
-       //private async Task CreateRoles(IServiceProvider serviceProvider)
-       // {
-       //     RoleManager<IdentityRole> roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-       //     ApplicationDbContext context = serviceProvider.GetRequiredService<ApplicationDbContext>();
-
-       //     IdentityResult result;
-
-       //     bool rolecheck = await roleManager.RoleExistsAsync("admin");
-       //     if (!rolecheck)
-       //         result = await roleManager.CreateAsync(new IdentityRole("admin"));
-
-       //     rolecheck = await roleManager.RoleExistsAsync("teacher");
-       //     if (!rolecheck)
-       //         result = await roleManager.CreateAsync(new IdentityRole("teacher"));
-
-       //     rolecheck = await roleManager.RoleExistsAsync("student");
-       //     if (!rolecheck)
-       //         result = await roleManager.CreateAsync(new IdentityRole("student"));
-
-       //     context.SaveChanges();
-       // }
+    
     }
 }

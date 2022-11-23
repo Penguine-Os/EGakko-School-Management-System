@@ -11,12 +11,11 @@ namespace EGakko_Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string GradeLevel { get; set; }
-        public int Year { get; set; }
+      
 
 
         // Navigational Properties
         public List<FieldSubject> FieldSubjects { get; set; }
 
-        public override string? ToString() => $"{Year}de Jaar";
     }
 }
