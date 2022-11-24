@@ -57,7 +57,7 @@ namespace EGakko_DAL.Data
         {
             base.OnModelCreating(builder);
 
-            builder.Seed();
+           // builder.Seed();
 
             builder.Entity<Teacher>()
                 .Property(x => x.Salary).HasColumnType("decimal(18,4)");
