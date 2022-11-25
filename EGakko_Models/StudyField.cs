@@ -15,7 +15,9 @@ namespace EGakko_Models
 
 
         // Navigational Properties
-        public List<FieldSubject> FieldSubjects { get; set; }
+
+        public virtual List<Student> Students { get; set; }
+        public virtual List<FieldSubject> FieldSubjects { get; set; }
 
     }
 }

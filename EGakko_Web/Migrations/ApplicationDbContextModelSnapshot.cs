@@ -29,14 +29,14 @@ namespace EGakko_Web.Migrations
                     b.Property<int>("Activity")
                         .HasColumnType("int");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("FieldSubjectId")
                         .HasColumnType("int");
 
                     b.Property<int>("MaxScore")
                         .HasColumnType("int");
+
+                    b.Property<string>("Summery")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TeacherId")
                         .HasColumnType("int");
@@ -57,23 +57,21 @@ namespace EGakko_Web.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Registry")
+                    b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int?>("StudentId")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TeacherId")
+                    b.Property<int>("StudentId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("StudentId");
-
-                    b.HasIndex("TeacherId");
 
                     b.ToTable("Attendances");
                 });
@@ -106,9 +104,6 @@ namespace EGakko_Web.Migrations
                     b.Property<string>("ClassRoomName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsOccupied")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
                     b.ToTable("Locations");
@@ -116,10 +111,8 @@ namespace EGakko_Web.Migrations
 
             modelBuilder.Entity("EGakko_Models.ClassSchedule", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("FieldSubjectId")
+                        .HasColumnType("int");
 
                     b.Property<int>("ClassId")
                         .HasColumnType("int");
@@ -127,7 +120,7 @@ namespace EGakko_Web.Migrations
                     b.Property<DateTime>("End")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("FieldSubjectID")
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
                     b.Property<int>("LocationId")
@@ -139,11 +132,9 @@ namespace EGakko_Web.Migrations
                     b.Property<int>("TeacherId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("FieldSubjectId", "ClassId");
 
                     b.HasIndex("ClassId");
-
-                    b.HasIndex("FieldSubjectID");
 
                     b.HasIndex("LocationId");
 
@@ -1109,25 +1100,21 @@ namespace EGakko_Web.Migrations
 
             modelBuilder.Entity("EGakko_Models.Result", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
 
                     b.Property<int>("EvaluationId")
                         .HasColumnType("int");
 
-                    b.Property<int>("StudentId")
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
                     b.Property<decimal>("TotalScore")
                         .HasColumnType("decimal(18,4)");
 
-                    b.HasKey("Id");
+                    b.HasKey("StudentId", "EvaluationId");
 
                     b.HasIndex("EvaluationId");
-
-                    b.HasIndex("StudentId");
 
                     b.ToTable("Results");
                 });
@@ -1139,7 +1126,7 @@ namespace EGakko_Web.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ClassId")
+                    b.Property<int>("ClassId")
                         .HasColumnType("int");
 
                     b.Property<string>("CustomUserIdStudent")
@@ -1165,28 +1152,6 @@ namespace EGakko_Web.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("EGakko_Models.StudentAttendance", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AttendanceId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AttendanceId");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("StudentAttendances");
-                });
-
             modelBuilder.Entity("EGakko_Models.StudyField", b =>
                 {
                     b.Property<int>("Id")
@@ -1203,12 +1168,7 @@ namespace EGakko_Web.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SubjectId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("SubjectId");
 
                     b.ToTable("StudyFields");
 
@@ -1297,12 +1257,7 @@ namespace EGakko_Web.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TeacherId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("TeacherId");
 
                     b.ToTable("Subjects");
 
@@ -1370,8 +1325,7 @@ namespace EGakko_Web.Migrations
                         new
                         {
                             Id = 13,
-                            Name = @"Philosophical subjects
-"
+                            Name = "Philosophical subjects"
                         },
                         new
                         {
@@ -1481,7 +1435,7 @@ namespace EGakko_Web.Migrations
                         new
                         {
                             Id = 35,
-                            Name = "Applied computer science / Dactylo"
+                            Name = "Applied computer science - Dactylo"
                         },
                         new
                         {
@@ -1560,20 +1514,16 @@ namespace EGakko_Web.Migrations
 
             modelBuilder.Entity("EGakko_Models.TeacherSubject", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<int>("SubjectId")
                         .HasColumnType("int");
 
                     b.Property<int>("TeacherId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
-                    b.HasIndex("SubjectId");
+                    b.HasKey("SubjectId", "TeacherId");
 
                     b.HasIndex("TeacherId");
 
@@ -1724,7 +1674,7 @@ namespace EGakko_Web.Migrations
                         .IsRequired();
 
                     b.HasOne("EGakko_Models.Teacher", "Teacher")
-                        .WithMany()
+                        .WithMany("ActivityEvaluations")
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1732,13 +1682,9 @@ namespace EGakko_Web.Migrations
 
             modelBuilder.Entity("EGakko_Models.Attendance", b =>
                 {
-                    b.HasOne("EGakko_Models.Student", null)
+                    b.HasOne("EGakko_Models.Student", "Student")
                         .WithMany("ListOfAttendance")
-                        .HasForeignKey("StudentId");
-
-                    b.HasOne("EGakko_Models.Teacher", "Teacher")
-                        .WithMany("ListOfAttendance")
-                        .HasForeignKey("TeacherId")
+                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1752,8 +1698,8 @@ namespace EGakko_Web.Migrations
                         .IsRequired();
 
                     b.HasOne("EGakko_Models.FieldSubject", "FieldSubject")
-                        .WithMany()
-                        .HasForeignKey("FieldSubjectID")
+                        .WithMany("ClassSchedules")
+                        .HasForeignKey("FieldSubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1779,7 +1725,7 @@ namespace EGakko_Web.Migrations
                         .IsRequired();
 
                     b.HasOne("EGakko_Models.Subject", "Subject")
-                        .WithMany()
+                        .WithMany("FieldSubjects")
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1788,62 +1734,35 @@ namespace EGakko_Web.Migrations
             modelBuilder.Entity("EGakko_Models.Result", b =>
                 {
                     b.HasOne("EGakko_Models.ActivityEvaluation", "ActivityEvaluation")
-                        .WithMany()
+                        .WithMany("Results")
                         .HasForeignKey("EvaluationId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("EGakko_Models.Student", "Student")
                         .WithMany("Results")
                         .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("EGakko_Models.Student", b =>
                 {
-                    b.HasOne("EGakko_Models.Class", null)
+                    b.HasOne("EGakko_Models.Class", "Class")
                         .WithMany("Students")
-                        .HasForeignKey("ClassId");
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("EGakko_Models.CustomUser", "CustomUserStudent")
                         .WithMany()
                         .HasForeignKey("CustomUserIdStudent");
 
                     b.HasOne("EGakko_Models.StudyField", "Field")
-                        .WithMany()
+                        .WithMany("Students")
                         .HasForeignKey("FieldId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("EGakko_Models.StudentAttendance", b =>
-                {
-                    b.HasOne("EGakko_Models.Attendance", "Attendance")
-                        .WithMany()
-                        .HasForeignKey("AttendanceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EGakko_Models.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("EGakko_Models.StudyField", b =>
-                {
-                    b.HasOne("EGakko_Models.Subject", null)
-                        .WithMany("Fields")
-                        .HasForeignKey("SubjectId");
-                });
-
-            modelBuilder.Entity("EGakko_Models.Subject", b =>
-                {
-                    b.HasOne("EGakko_Models.Teacher", null)
-                        .WithMany("Subjects")
-                        .HasForeignKey("TeacherId");
                 });
 
             modelBuilder.Entity("EGakko_Models.Teacher", b =>
@@ -1856,13 +1775,13 @@ namespace EGakko_Web.Migrations
             modelBuilder.Entity("EGakko_Models.TeacherSubject", b =>
                 {
                     b.HasOne("EGakko_Models.Subject", "Subject")
-                        .WithMany()
+                        .WithMany("TeacherSubjects")
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("EGakko_Models.Teacher", "Teacher")
-                        .WithMany()
+                        .WithMany("Subjects")
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

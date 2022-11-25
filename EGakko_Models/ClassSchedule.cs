@@ -15,19 +15,19 @@ namespace EGakko_Models
 
         public int TeacherId { get; set; }
         [ForeignKey("TeacherId")]
-        public Teacher Teacher { get; set; }
+        public virtual Teacher Teacher { get; set; }
 
         public int ClassId { get; set; }
         [ForeignKey("ClassId")]
-        public Class Class { get; set; }
+        public virtual Class Class { get; set; }
 
         public int LocationId { get; set; }
         [ForeignKey("LocationId")]
-        public ClassRoomLocation Location { get; set; }
+        public virtual ClassRoomLocation Location { get; set; }
 
-        public int FieldSubjectID { get; set; }
-        [ForeignKey("FieldSubjectID")]
-        public FieldSubject FieldSubject { get; set; }
+        public int FieldSubjectId { get; set; }
+        [ForeignKey("FieldSubjectId")]
+        public virtual FieldSubject FieldSubject { get; set; }
 
 
     }

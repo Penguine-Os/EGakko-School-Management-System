@@ -12,11 +12,11 @@ namespace EGakko_Models
         // Navigational Properties
         public int StudentId { get; set; }
         [ForeignKey("StudentId")]
-        public Student Student { get; set; }
+        public virtual Student Student { get; set; }
 
         public int EvaluationId { get; set; }
         [ForeignKey("EvaluationId")]
-        public ActivityEvaluation ActivityEvaluation { get; set; }
+        public virtual ActivityEvaluation ActivityEvaluation { get; set; }
 
     }
 }

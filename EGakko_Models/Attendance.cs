@@ -8,16 +8,16 @@ namespace EGakko_Models
     {
         [Key]
         public int Id { get; set; }
-        public DateTime Registry { get; set; }
-        public StatusType Status { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public string Status { get; set; } = "Absent";
 
         // Navigational Properties
 
-        public int TeacherId { get; set; }
-        [ForeignKey("TeacherId")]
-        public Teacher Teacher { get; set; }
-
-        //public List<Student> Students { get; set; }
+        public int StudentId { get; set; }
+       [ForeignKey("StudentId")]
+        public virtual Student Student { get; set; }
+     
 
     }
 }

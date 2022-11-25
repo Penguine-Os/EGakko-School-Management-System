@@ -16,15 +16,21 @@ namespace EGakko_Models
         // Navigational Properties
         public string CustomUserIdStudent { get; set; }
         [ForeignKey("CustomUserIdStudent")]
-        public CustomUser CustomUserStudent { get; set; }
+        public virtual CustomUser CustomUserStudent { get; set; }
 
         public int FieldId { get; set; }
         [ForeignKey("FieldId")]
-        public StudyField Field { get; set; }
+        public virtual StudyField Field { get; set; }
 
-        public List<Result> Results { get; set; }
+        
+        public int ClassId { get; set; }
+        [ForeignKey("ClassId")]
+        public virtual Class Class { get; set; }
 
-        public List<Attendance> ListOfAttendance { get; set; }
+
+        public virtual List<Result> Results { get; set; }
+
+        public virtual List<Attendance> ListOfAttendance { get; set; }
 
     }
 }

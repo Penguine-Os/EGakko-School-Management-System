@@ -15,11 +15,11 @@ namespace EGakko_Models
         // Navigational Properties
         public string CustomUserIdTeacher { get; set; }
         [ForeignKey("CustomUserIdTeacher")]
-        public CustomUser CustomUserTeacher { get; set; }
+        public virtual CustomUser CustomUserTeacher { get; set; }
+        public virtual List<ActivityEvaluation> ActivityEvaluations{ get; set; }
 
-        public List<Attendance> ListOfAttendance { get; set; }
-        public List<Subject> Subjects { get; set; }
-        public List<ClassSchedule> ClassSchedules { get; set; }
+        public virtual List<TeacherSubject> Subjects { get; set; }
+        public virtual List<ClassSchedule> ClassSchedules { get; set; }
 
     }
 }
