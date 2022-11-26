@@ -29,7 +29,7 @@ namespace EGakko_Web
                     var rolmangager = services.GetRequiredService<RoleManager<IdentityRole>>();
                     var ApplicationDbContext = services.GetRequiredService<ApplicationDbContext>();
                     IdentityDataInitializer.CreateRoles(rolmangager, ApplicationDbContext).Wait();
-                    IdentityDataInitializer.SeedIdentityUsers(userManager, rolmangager).Wait();
+                    IdentityDataInitializer.SeedIdentityUsers(userManager, rolmangager, ApplicationDbContext).Wait();
                 }
                 catch (Exception ex)
                 {

@@ -8745,6 +8745,9 @@ textarea.form-control-lg {
 .bg-body {
     --bs-bg-opacity: 1;
     background-color: #343a40 !important;
+    margin: 0;
+    width: 100vw;
+    height: 95vh;
 }
 
 .bg-transparent {

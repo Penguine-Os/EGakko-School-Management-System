@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace EGakko_Models
 {
     public class Subject
@@ -11,5 +13,15 @@ namespace EGakko_Models
         // Navigational Properties
         public virtual List<FieldSubject> FieldSubjects { get; set; }
         public virtual List<TeacherSubject> TeacherSubjects { get; set; }
+
+        public Subject()
+        {
+
+        }
+        public Subject( int subId, string subName)
+        {
+            Id = subId;
+            Name = subName;
+        }
     }
 }

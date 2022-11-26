@@ -15,5 +15,15 @@ namespace EGakko_Models
         public virtual List<Student> Students { get; set; }
         public virtual List<ClassSchedule> ClassSchedules { get; set; }
 
+        public Class()
+        {
+
+        }
+        public Class(int id, string name)
+        {
+            Id = id;
+            ClassName = name;
+        }
+
     }
 }

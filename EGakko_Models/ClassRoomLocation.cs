@@ -12,5 +12,15 @@ namespace EGakko_Models
        
         // Navigational Properties
         public virtual List<ClassSchedule> ClassSchedules { get; set; }
+        public ClassRoomLocation()
+        {
+
+        }
+        public ClassRoomLocation(int id, int capacity, string name)
+        {
+            Id = id;
+            Capacity = capacity;
+            ClassRoomName = name;
+        }
     }
 }

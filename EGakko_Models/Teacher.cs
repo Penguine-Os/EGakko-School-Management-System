@@ -20,6 +20,14 @@ namespace EGakko_Models
 
         public virtual List<TeacherSubject> Subjects { get; set; }
         public virtual List<ClassSchedule> ClassSchedules { get; set; }
+        public Teacher()
+        {
+
+        }
+        public Teacher(string id)
+        {
+            CustomUserIdTeacher = id;
+        }
 
     }
 }
