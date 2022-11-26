@@ -16,9 +16,6 @@ namespace EGakko_DAL.Data
 {
     public class ApplicationDbContext : IdentityDbContext<CustomUser>
     {
-        private readonly UserManager<CustomUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
            
