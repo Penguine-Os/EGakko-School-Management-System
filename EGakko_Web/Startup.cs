@@ -1,5 +1,6 @@
 using EGakko_DAL.Data;
 using EGakko_Models;
+using EGakko_Web.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Authentication;
 using System.Threading.Tasks;
 
 namespace EGakko_Web
@@ -30,12 +32,26 @@ namespace EGakko_Web
             services.AddControllersWithViews();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<CustomUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddDefaultIdentity<CustomUser>(options =>
+            {
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 1;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequiredUniqueChars = 0;
+
+            })
+                    .AddRoles<IdentityRole>()
+                    .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages().AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
+            IServiceProvider serviceProvider,
+            UserManager<CustomUser> userManager,
+            RoleManager<IdentityRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -54,8 +70,7 @@ namespace EGakko_Web
             app.UseAuthentication();
             app.UseAuthorization();
 
-            CreateRoles(serviceProvider).Wait();
-
+           
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -64,33 +79,6 @@ namespace EGakko_Web
                 endpoints.MapRazorPages();
             });
         }
-        private async Task CreateRoles(IServiceProvider serviceProvider)
-        {
-            RoleManager<IdentityRole> roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            ApplicationDbContext context = serviceProvider.GetRequiredService<ApplicationDbContext>();
-
-            IdentityResult result;
-
-            bool rolecheck  = await roleManager.RoleExistsAsync("defaultUser");
-            if (!rolecheck)
-                result = await roleManager.CreateAsync(new IdentityRole("defaultUser"));
-
-            rolecheck = await roleManager.RoleExistsAsync("admin");
-            if (!rolecheck)
-                result = await roleManager.CreateAsync(new IdentityRole("admin"));
-
-            rolecheck = await roleManager.RoleExistsAsync("teacher");
-            if (!rolecheck)
-                result = await roleManager.CreateAsync(new IdentityRole("teacher"));
-
-
-            rolecheck = await roleManager.RoleExistsAsync("student");
-            if (!rolecheck)
-                result = await roleManager.CreateAsync(new IdentityRole("student"));
-
-
-         
-            context.SaveChanges();
-        }
+       
     }
 }

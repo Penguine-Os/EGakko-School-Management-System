@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EGakko_Models
 {
-    [Table("Classes")]
+   
     public class Class
     {
         [Key]
@@ -12,8 +12,8 @@ namespace EGakko_Models
         public string ClassName { get; set; }
 
         // Navigational Properties
-        public List<Student> Students { get; set; }
-        public List<ClassSchedule> ClassSchedules { get; set; }
+        public virtual List<Student> Students { get; set; }
+        public virtual List<ClassSchedule> ClassSchedules { get; set; }
 
     }
 }

@@ -9,6 +9,7 @@ namespace EGakko_Models
         public int Id { get; set; }
         public string Name { get; set; }
         // Navigational Properties
-        public List<StudyField> Fields { get; set; }
+        public virtual List<FieldSubject> FieldSubjects { get; set; }
+        public virtual List<TeacherSubject> TeacherSubjects { get; set; }
     }
 }

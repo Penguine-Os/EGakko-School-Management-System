@@ -29,14 +29,14 @@ namespace EGakko_Web.Migrations
                     b.Property<int>("Activity")
                         .HasColumnType("int");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("FieldSubjectId")
                         .HasColumnType("int");
 
                     b.Property<int>("MaxScore")
                         .HasColumnType("int");
+
+                    b.Property<string>("Summery")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TeacherId")
                         .HasColumnType("int");
@@ -57,23 +57,21 @@ namespace EGakko_Web.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Registry")
+                    b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int?>("StudentId")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TeacherId")
+                    b.Property<int>("StudentId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("StudentId");
-
-                    b.HasIndex("TeacherId");
 
                     b.ToTable("Attendances");
                 });
@@ -106,9 +104,6 @@ namespace EGakko_Web.Migrations
                     b.Property<string>("ClassRoomName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsOccupied")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
                     b.ToTable("Locations");
@@ -116,10 +111,8 @@ namespace EGakko_Web.Migrations
 
             modelBuilder.Entity("EGakko_Models.ClassSchedule", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("FieldSubjectId")
+                        .HasColumnType("int");
 
                     b.Property<int>("ClassId")
                         .HasColumnType("int");
@@ -127,7 +120,7 @@ namespace EGakko_Web.Migrations
                     b.Property<DateTime>("End")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("FieldSubjectID")
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
                     b.Property<int>("LocationId")
@@ -139,11 +132,9 @@ namespace EGakko_Web.Migrations
                     b.Property<int>("TeacherId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("FieldSubjectId", "ClassId");
 
                     b.HasIndex("ClassId");
-
-                    b.HasIndex("FieldSubjectID");
 
                     b.HasIndex("LocationId");
 
@@ -271,29 +262,859 @@ namespace EGakko_Web.Migrations
                     b.HasIndex("SubjectId");
 
                     b.ToTable("FieldSubjects");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FieldId = 1,
+                            HoursPerWeek = 5,
+                            IsCoreSubject = true,
+                            SubjectId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            FieldId = 1,
+                            HoursPerWeek = 4,
+                            IsCoreSubject = true,
+                            SubjectId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            FieldId = 1,
+                            HoursPerWeek = 3,
+                            IsCoreSubject = false,
+                            SubjectId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            FieldId = 1,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 45
+                        },
+                        new
+                        {
+                            Id = 5,
+                            FieldId = 1,
+                            HoursPerWeek = 5,
+                            IsCoreSubject = true,
+                            SubjectId = 7
+                        },
+                        new
+                        {
+                            Id = 6,
+                            FieldId = 1,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 8
+                        },
+                        new
+                        {
+                            Id = 7,
+                            FieldId = 1,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 9
+                        },
+                        new
+                        {
+                            Id = 8,
+                            FieldId = 1,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 10
+                        },
+                        new
+                        {
+                            Id = 9,
+                            FieldId = 1,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 11
+                        },
+                        new
+                        {
+                            Id = 10,
+                            FieldId = 1,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 12
+                        },
+                        new
+                        {
+                            Id = 11,
+                            FieldId = 1,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 13
+                        },
+                        new
+                        {
+                            Id = 12,
+                            FieldId = 1,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 14
+                        },
+                        new
+                        {
+                            Id = 13,
+                            FieldId = 2,
+                            HoursPerWeek = 3,
+                            IsCoreSubject = false,
+                            SubjectId = 1
+                        },
+                        new
+                        {
+                            Id = 14,
+                            FieldId = 2,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 2
+                        },
+                        new
+                        {
+                            Id = 15,
+                            FieldId = 2,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 3
+                        },
+                        new
+                        {
+                            Id = 16,
+                            FieldId = 2,
+                            HoursPerWeek = 4,
+                            IsCoreSubject = true,
+                            SubjectId = 7
+                        },
+                        new
+                        {
+                            Id = 17,
+                            FieldId = 2,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 8
+                        },
+                        new
+                        {
+                            Id = 18,
+                            FieldId = 2,
+                            HoursPerWeek = 1,
+                            IsCoreSubject = false,
+                            SubjectId = 9
+                        },
+                        new
+                        {
+                            Id = 19,
+                            FieldId = 2,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 13
+                        },
+                        new
+                        {
+                            Id = 20,
+                            FieldId = 2,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 14
+                        },
+                        new
+                        {
+                            Id = 21,
+                            FieldId = 2,
+                            HoursPerWeek = 3,
+                            IsCoreSubject = false,
+                            SubjectId = 10
+                        },
+                        new
+                        {
+                            Id = 22,
+                            FieldId = 2,
+                            HoursPerWeek = 3,
+                            IsCoreSubject = false,
+                            SubjectId = 15
+                        },
+                        new
+                        {
+                            Id = 23,
+                            FieldId = 2,
+                            HoursPerWeek = 3,
+                            IsCoreSubject = false,
+                            SubjectId = 16
+                        },
+                        new
+                        {
+                            Id = 24,
+                            FieldId = 2,
+                            HoursPerWeek = 3,
+                            IsCoreSubject = false,
+                            SubjectId = 17
+                        },
+                        new
+                        {
+                            Id = 25,
+                            FieldId = 2,
+                            HoursPerWeek = 3,
+                            IsCoreSubject = false,
+                            SubjectId = 18
+                        },
+                        new
+                        {
+                            Id = 26,
+                            FieldId = 2,
+                            HoursPerWeek = 1,
+                            IsCoreSubject = false,
+                            SubjectId = 19
+                        },
+                        new
+                        {
+                            Id = 27,
+                            FieldId = 3,
+                            HoursPerWeek = 5,
+                            IsCoreSubject = true,
+                            SubjectId = 1
+                        },
+                        new
+                        {
+                            Id = 28,
+                            FieldId = 3,
+                            HoursPerWeek = 3,
+                            IsCoreSubject = false,
+                            SubjectId = 2
+                        },
+                        new
+                        {
+                            Id = 29,
+                            FieldId = 3,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 3
+                        },
+                        new
+                        {
+                            Id = 30,
+                            FieldId = 3,
+                            HoursPerWeek = 7,
+                            IsCoreSubject = true,
+                            SubjectId = 7
+                        },
+                        new
+                        {
+                            Id = 31,
+                            FieldId = 3,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 8
+                        },
+                        new
+                        {
+                            Id = 32,
+                            FieldId = 3,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 9
+                        },
+                        new
+                        {
+                            Id = 33,
+                            FieldId = 3,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 13
+                        },
+                        new
+                        {
+                            Id = 34,
+                            FieldId = 3,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 14
+                        },
+                        new
+                        {
+                            Id = 35,
+                            FieldId = 3,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 10
+                        },
+                        new
+                        {
+                            Id = 36,
+                            FieldId = 3,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 11
+                        },
+                        new
+                        {
+                            Id = 37,
+                            FieldId = 3,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 12
+                        },
+                        new
+                        {
+                            Id = 38,
+                            FieldId = 3,
+                            HoursPerWeek = 1,
+                            IsCoreSubject = false,
+                            SubjectId = 20
+                        },
+                        new
+                        {
+                            Id = 39,
+                            FieldId = 3,
+                            HoursPerWeek = 1,
+                            IsCoreSubject = false,
+                            SubjectId = 21
+                        },
+                        new
+                        {
+                            Id = 40,
+                            FieldId = 4,
+                            HoursPerWeek = 5,
+                            IsCoreSubject = true,
+                            SubjectId = 1
+                        },
+                        new
+                        {
+                            Id = 41,
+                            FieldId = 4,
+                            HoursPerWeek = 3,
+                            IsCoreSubject = false,
+                            SubjectId = 2
+                        },
+                        new
+                        {
+                            Id = 42,
+                            FieldId = 4,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 3
+                        },
+                        new
+                        {
+                            Id = 43,
+                            FieldId = 4,
+                            HoursPerWeek = 4,
+                            IsCoreSubject = true,
+                            SubjectId = 6
+                        },
+                        new
+                        {
+                            Id = 44,
+                            FieldId = 4,
+                            HoursPerWeek = 7,
+                            IsCoreSubject = true,
+                            SubjectId = 7
+                        },
+                        new
+                        {
+                            Id = 45,
+                            FieldId = 4,
+                            HoursPerWeek = 1,
+                            IsCoreSubject = false,
+                            SubjectId = 8
+                        },
+                        new
+                        {
+                            Id = 46,
+                            FieldId = 4,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 9
+                        },
+                        new
+                        {
+                            Id = 47,
+                            FieldId = 4,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 13
+                        },
+                        new
+                        {
+                            Id = 48,
+                            FieldId = 4,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 14
+                        },
+                        new
+                        {
+                            Id = 49,
+                            FieldId = 4,
+                            HoursPerWeek = 1,
+                            IsCoreSubject = false,
+                            SubjectId = 10
+                        },
+                        new
+                        {
+                            Id = 50,
+                            FieldId = 4,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 11
+                        },
+                        new
+                        {
+                            Id = 51,
+                            FieldId = 4,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 12
+                        },
+                        new
+                        {
+                            Id = 52,
+                            FieldId = 5,
+                            HoursPerWeek = 5,
+                            IsCoreSubject = true,
+                            SubjectId = 1
+                        },
+                        new
+                        {
+                            Id = 53,
+                            FieldId = 5,
+                            HoursPerWeek = 4,
+                            IsCoreSubject = false,
+                            SubjectId = 2
+                        },
+                        new
+                        {
+                            Id = 54,
+                            FieldId = 5,
+                            HoursPerWeek = 3,
+                            IsCoreSubject = false,
+                            SubjectId = 3
+                        },
+                        new
+                        {
+                            Id = 55,
+                            FieldId = 5,
+                            HoursPerWeek = 4,
+                            IsCoreSubject = true,
+                            SubjectId = 6
+                        },
+                        new
+                        {
+                            Id = 56,
+                            FieldId = 5,
+                            HoursPerWeek = 3,
+                            IsCoreSubject = true,
+                            SubjectId = 7
+                        },
+                        new
+                        {
+                            Id = 57,
+                            FieldId = 5,
+                            HoursPerWeek = 1,
+                            IsCoreSubject = false,
+                            SubjectId = 8
+                        },
+                        new
+                        {
+                            Id = 58,
+                            FieldId = 5,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 9
+                        },
+                        new
+                        {
+                            Id = 59,
+                            FieldId = 5,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 13
+                        },
+                        new
+                        {
+                            Id = 60,
+                            FieldId = 5,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 14
+                        },
+                        new
+                        {
+                            Id = 61,
+                            FieldId = 5,
+                            HoursPerWeek = 1,
+                            IsCoreSubject = false,
+                            SubjectId = 22
+                        },
+                        new
+                        {
+                            Id = 62,
+                            FieldId = 5,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 23
+                        },
+                        new
+                        {
+                            Id = 63,
+                            FieldId = 5,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 24
+                        },
+                        new
+                        {
+                            Id = 64,
+                            FieldId = 5,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 45
+                        },
+                        new
+                        {
+                            Id = 65,
+                            FieldId = 6,
+                            HoursPerWeek = 5,
+                            IsCoreSubject = true,
+                            SubjectId = 1
+                        },
+                        new
+                        {
+                            Id = 66,
+                            FieldId = 6,
+                            HoursPerWeek = 3,
+                            IsCoreSubject = false,
+                            SubjectId = 2
+                        },
+                        new
+                        {
+                            Id = 67,
+                            FieldId = 6,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 3
+                        },
+                        new
+                        {
+                            Id = 68,
+                            FieldId = 6,
+                            HoursPerWeek = 4,
+                            IsCoreSubject = true,
+                            SubjectId = 6
+                        },
+                        new
+                        {
+                            Id = 69,
+                            FieldId = 6,
+                            HoursPerWeek = 5,
+                            IsCoreSubject = true,
+                            SubjectId = 7
+                        },
+                        new
+                        {
+                            Id = 70,
+                            FieldId = 6,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 8
+                        },
+                        new
+                        {
+                            Id = 71,
+                            FieldId = 6,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 9
+                        },
+                        new
+                        {
+                            Id = 72,
+                            FieldId = 6,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 13
+                        },
+                        new
+                        {
+                            Id = 73,
+                            FieldId = 6,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 14
+                        },
+                        new
+                        {
+                            Id = 74,
+                            FieldId = 6,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 10
+                        },
+                        new
+                        {
+                            Id = 75,
+                            FieldId = 6,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 11
+                        },
+                        new
+                        {
+                            Id = 76,
+                            FieldId = 6,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 12
+                        },
+                        new
+                        {
+                            Id = 77,
+                            FieldId = 7,
+                            HoursPerWeek = 5,
+                            IsCoreSubject = true,
+                            SubjectId = 1
+                        },
+                        new
+                        {
+                            Id = 78,
+                            FieldId = 7,
+                            HoursPerWeek = 3,
+                            IsCoreSubject = false,
+                            SubjectId = 2
+                        },
+                        new
+                        {
+                            Id = 79,
+                            FieldId = 7,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 3
+                        },
+                        new
+                        {
+                            Id = 80,
+                            FieldId = 7,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 45
+                        },
+                        new
+                        {
+                            Id = 81,
+                            FieldId = 7,
+                            HoursPerWeek = 3,
+                            IsCoreSubject = false,
+                            SubjectId = 7
+                        },
+                        new
+                        {
+                            Id = 82,
+                            FieldId = 7,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 8
+                        },
+                        new
+                        {
+                            Id = 83,
+                            FieldId = 7,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 9
+                        },
+                        new
+                        {
+                            Id = 84,
+                            FieldId = 7,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 13
+                        },
+                        new
+                        {
+                            Id = 85,
+                            FieldId = 7,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 14
+                        },
+                        new
+                        {
+                            Id = 86,
+                            FieldId = 7,
+                            HoursPerWeek = 1,
+                            IsCoreSubject = false,
+                            SubjectId = 23
+                        },
+                        new
+                        {
+                            Id = 87,
+                            FieldId = 7,
+                            HoursPerWeek = 4,
+                            IsCoreSubject = true,
+                            SubjectId = 25
+                        },
+                        new
+                        {
+                            Id = 88,
+                            FieldId = 7,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 24
+                        },
+                        new
+                        {
+                            Id = 89,
+                            FieldId = 7,
+                            HoursPerWeek = 3,
+                            IsCoreSubject = false,
+                            SubjectId = 26
+                        },
+                        new
+                        {
+                            Id = 90,
+                            FieldId = 2,
+                            HoursPerWeek = 4,
+                            IsCoreSubject = false,
+                            SubjectId = 1
+                        },
+                        new
+                        {
+                            Id = 91,
+                            FieldId = 2,
+                            HoursPerWeek = 3,
+                            IsCoreSubject = false,
+                            SubjectId = 2
+                        },
+                        new
+                        {
+                            Id = 92,
+                            FieldId = 2,
+                            HoursPerWeek = 3,
+                            IsCoreSubject = false,
+                            SubjectId = 3
+                        },
+                        new
+                        {
+                            Id = 93,
+                            FieldId = 2,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = true,
+                            SubjectId = 7
+                        },
+                        new
+                        {
+                            Id = 94,
+                            FieldId = 2,
+                            HoursPerWeek = 1,
+                            IsCoreSubject = false,
+                            SubjectId = 8
+                        },
+                        new
+                        {
+                            Id = 95,
+                            FieldId = 2,
+                            HoursPerWeek = 1,
+                            IsCoreSubject = false,
+                            SubjectId = 9
+                        },
+                        new
+                        {
+                            Id = 96,
+                            FieldId = 2,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 13
+                        },
+                        new
+                        {
+                            Id = 97,
+                            FieldId = 2,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 14
+                        },
+                        new
+                        {
+                            Id = 98,
+                            FieldId = 2,
+                            HoursPerWeek = 1,
+                            IsCoreSubject = false,
+                            SubjectId = 24
+                        },
+                        new
+                        {
+                            Id = 99,
+                            FieldId = 2,
+                            HoursPerWeek = 3,
+                            IsCoreSubject = false,
+                            SubjectId = 5
+                        },
+                        new
+                        {
+                            Id = 100,
+                            FieldId = 2,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 28
+                        },
+                        new
+                        {
+                            Id = 101,
+                            FieldId = 2,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 29
+                        },
+                        new
+                        {
+                            Id = 102,
+                            FieldId = 2,
+                            HoursPerWeek = 2,
+                            IsCoreSubject = false,
+                            SubjectId = 30
+                        },
+                        new
+                        {
+                            Id = 103,
+                            FieldId = 2,
+                            HoursPerWeek = 7,
+                            IsCoreSubject = false,
+                            SubjectId = 31
+                        },
+                        new
+                        {
+                            Id = 104,
+                            FieldId = 2,
+                            HoursPerWeek = 1,
+                            IsCoreSubject = false,
+                            SubjectId = 19
+                        });
                 });
 
             modelBuilder.Entity("EGakko_Models.Result", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
 
                     b.Property<int>("EvaluationId")
                         .HasColumnType("int");
 
-                    b.Property<int>("StudentId")
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
                     b.Property<decimal>("TotalScore")
                         .HasColumnType("decimal(18,4)");
 
-                    b.HasKey("Id");
+                    b.HasKey("StudentId", "EvaluationId");
 
                     b.HasIndex("EvaluationId");
-
-                    b.HasIndex("StudentId");
 
                     b.ToTable("Results");
                 });
@@ -305,7 +1126,7 @@ namespace EGakko_Web.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ClassId")
+                    b.Property<int>("ClassId")
                         .HasColumnType("int");
 
                     b.Property<string>("CustomUserIdStudent")
@@ -331,28 +1152,6 @@ namespace EGakko_Web.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("EGakko_Models.StudentAttendance", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AttendanceId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AttendanceId");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("StudentAttendances");
-                });
-
             modelBuilder.Entity("EGakko_Models.StudyField", b =>
                 {
                     b.Property<int>("Id")
@@ -369,17 +1168,83 @@ namespace EGakko_Web.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SubjectId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("SubjectId");
-
                     b.ToTable("StudyFields");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            GradeLevel = "3rd Degree",
+                            Name = "Modern Language-Sciences"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            GradeLevel = "3rd Degree",
+                            Name = "Engineering Sciences"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            GradeLevel = "3rd Degree",
+                            Name = "Science Mathematics"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            GradeLevel = "3rd Degree",
+                            Name = "Latin mathematics"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            GradeLevel = "3rd Degree",
+                            Name = "Latin - Modern Languages"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            GradeLevel = "3rd Degree",
+                            Name = "latin -  Sciences"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            GradeLevel = "3rd Degree",
+                            Name = "Human Sciences"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            GradeLevel = "3rd Degree",
+                            Name = "Tourism"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            GradeLevel = "3rd Degree",
+                            Name = "Economics - Mathematics"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            GradeLevel = "3rd Degree",
+                            Name = "Economy - Modern Languages"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            GradeLevel = "3rd Degree",
+                            Name = "Commerce"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            GradeLevel = "3rd Degree",
+                            Name = "Logistical Maritime Administration"
+                        });
                 });
 
             modelBuilder.Entity("EGakko_Models.Subject", b =>
@@ -392,14 +1257,236 @@ namespace EGakko_Web.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TeacherId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("TeacherId");
-
                     b.ToTable("Subjects");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Dutch"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "French"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "English"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "German"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Spanish"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Latin"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Mathematics"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Geography"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "History"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "Biology"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = "Chemistry"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = "Physics"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Name = "Philosophical subjects"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Name = "Physical education"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Name = "Applied biochemistry"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Name = "Applied chemistry"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Name = "Applied physics"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Name = "Applied ecology"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Name = "Applied computer science"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Name = "Scientific work physics"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Name = "Scientific work chemistry"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Name = "Research competencies"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Name = "Seminar"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Name = "Natural sciences"
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Name = "Behavioral sciences"
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Name = "Cultural sciences"
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Name = "Human geography"
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Name = "Touristic culture"
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Name = "Touristic organization"
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Name = "Touristic spaces"
+                        },
+                        new
+                        {
+                            Id = 31,
+                            Name = "Internship"
+                        },
+                        new
+                        {
+                            Id = 32,
+                            Name = "Economics"
+                        },
+                        new
+                        {
+                            Id = 33,
+                            Name = "Economics law"
+                        },
+                        new
+                        {
+                            Id = 34,
+                            Name = "Logistics and maritime cases"
+                        },
+                        new
+                        {
+                            Id = 35,
+                            Name = "Applied computer science - Dactylo"
+                        },
+                        new
+                        {
+                            Id = 36,
+                            Name = "Accounting"
+                        },
+                        new
+                        {
+                            Id = 37,
+                            Name = "Law"
+                        },
+                        new
+                        {
+                            Id = 38,
+                            Name = "Business Economics"
+                        },
+                        new
+                        {
+                            Id = 39,
+                            Name = "Economic Geography"
+                        },
+                        new
+                        {
+                            Id = 40,
+                            Name = "Sales"
+                        },
+                        new
+                        {
+                            Id = 41,
+                            Name = "Economics seminar"
+                        },
+                        new
+                        {
+                            Id = 42,
+                            Name = "PAV"
+                        },
+                        new
+                        {
+                            Id = 43,
+                            Name = "Applied Economics: Law"
+                        },
+                        new
+                        {
+                            Id = 44,
+                            Name = "Introduction to International Trade"
+                        },
+                        new
+                        {
+                            Id = 45,
+                            Name = "Duits/Spaans"
+                        });
                 });
 
             modelBuilder.Entity("EGakko_Models.Teacher", b =>
@@ -427,20 +1514,16 @@ namespace EGakko_Web.Migrations
 
             modelBuilder.Entity("EGakko_Models.TeacherSubject", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<int>("SubjectId")
                         .HasColumnType("int");
 
                     b.Property<int>("TeacherId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
-                    b.HasIndex("SubjectId");
+                    b.HasKey("SubjectId", "TeacherId");
 
                     b.HasIndex("TeacherId");
 
@@ -591,7 +1674,7 @@ namespace EGakko_Web.Migrations
                         .IsRequired();
 
                     b.HasOne("EGakko_Models.Teacher", "Teacher")
-                        .WithMany()
+                        .WithMany("ActivityEvaluations")
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -599,13 +1682,9 @@ namespace EGakko_Web.Migrations
 
             modelBuilder.Entity("EGakko_Models.Attendance", b =>
                 {
-                    b.HasOne("EGakko_Models.Student", null)
+                    b.HasOne("EGakko_Models.Student", "Student")
                         .WithMany("ListOfAttendance")
-                        .HasForeignKey("StudentId");
-
-                    b.HasOne("EGakko_Models.Teacher", "Teacher")
-                        .WithMany("ListOfAttendance")
-                        .HasForeignKey("TeacherId")
+                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -619,8 +1698,8 @@ namespace EGakko_Web.Migrations
                         .IsRequired();
 
                     b.HasOne("EGakko_Models.FieldSubject", "FieldSubject")
-                        .WithMany()
-                        .HasForeignKey("FieldSubjectID")
+                        .WithMany("ClassSchedules")
+                        .HasForeignKey("FieldSubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -646,7 +1725,7 @@ namespace EGakko_Web.Migrations
                         .IsRequired();
 
                     b.HasOne("EGakko_Models.Subject", "Subject")
-                        .WithMany()
+                        .WithMany("FieldSubjects")
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -655,62 +1734,35 @@ namespace EGakko_Web.Migrations
             modelBuilder.Entity("EGakko_Models.Result", b =>
                 {
                     b.HasOne("EGakko_Models.ActivityEvaluation", "ActivityEvaluation")
-                        .WithMany()
+                        .WithMany("Results")
                         .HasForeignKey("EvaluationId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("EGakko_Models.Student", "Student")
                         .WithMany("Results")
                         .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("EGakko_Models.Student", b =>
                 {
-                    b.HasOne("EGakko_Models.Class", null)
+                    b.HasOne("EGakko_Models.Class", "Class")
                         .WithMany("Students")
-                        .HasForeignKey("ClassId");
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("EGakko_Models.CustomUser", "CustomUserStudent")
                         .WithMany()
                         .HasForeignKey("CustomUserIdStudent");
 
                     b.HasOne("EGakko_Models.StudyField", "Field")
-                        .WithMany()
+                        .WithMany("Students")
                         .HasForeignKey("FieldId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("EGakko_Models.StudentAttendance", b =>
-                {
-                    b.HasOne("EGakko_Models.Attendance", "Attendance")
-                        .WithMany()
-                        .HasForeignKey("AttendanceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EGakko_Models.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("EGakko_Models.StudyField", b =>
-                {
-                    b.HasOne("EGakko_Models.Subject", null)
-                        .WithMany("Fields")
-                        .HasForeignKey("SubjectId");
-                });
-
-            modelBuilder.Entity("EGakko_Models.Subject", b =>
-                {
-                    b.HasOne("EGakko_Models.Teacher", null)
-                        .WithMany("Subjects")
-                        .HasForeignKey("TeacherId");
                 });
 
             modelBuilder.Entity("EGakko_Models.Teacher", b =>
@@ -723,13 +1775,13 @@ namespace EGakko_Web.Migrations
             modelBuilder.Entity("EGakko_Models.TeacherSubject", b =>
                 {
                     b.HasOne("EGakko_Models.Subject", "Subject")
-                        .WithMany()
+                        .WithMany("TeacherSubjects")
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("EGakko_Models.Teacher", "Teacher")
-                        .WithMany()
+                        .WithMany("Subjects")
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

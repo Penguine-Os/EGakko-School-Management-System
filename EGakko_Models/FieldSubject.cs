@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EGakko_Models
@@ -14,10 +15,11 @@ namespace EGakko_Models
         // Navigational Properties
         public int FieldId { get; set; }
         [ForeignKey("FieldId")]
-        public StudyField Field { get; set; }
+        public virtual StudyField Field { get; set; }
 
         public int SubjectId { get; set; }
         [ForeignKey("SubjectId")]
-        public Subject Subject { get; set; }
+        public virtual Subject Subject { get; set; }
+        public virtual List<ClassSchedule> ClassSchedules { get; set; }
     }
 }
