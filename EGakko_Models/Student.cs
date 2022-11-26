@@ -31,6 +31,16 @@ namespace EGakko_Models
         public virtual List<Result> Results { get; set; }
 
         public virtual List<Attendance> ListOfAttendance { get; set; }
+        public Student()
+        {
+
+        }
+        public Student(string id, int fieldId, int classId)
+        {
+            CustomUserIdStudent = id;
+            FieldId = fieldId;
+            ClassId = classId;
+        }
 
     }
 }

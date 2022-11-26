@@ -88,8 +88,7 @@ namespace EGakko_Web.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    GradeLevel = table.Column<string>(nullable: true)
+                    Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -443,22 +442,61 @@ namespace EGakko_Web.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "StudyFields",
-                columns: new[] { "Id", "Description", "GradeLevel", "Name" },
+                table: "Classes",
+                columns: new[] { "Id", "ClassName" },
                 values: new object[,]
                 {
-                    { 1, null, "3rd Degree", "Modern Language-Sciences" },
-                    { 12, null, "3rd Degree", "Logistical Maritime Administration" },
-                    { 10, null, "3rd Degree", "Economy - Modern Languages" },
-                    { 9, null, "3rd Degree", "Economics - Mathematics" },
-                    { 8, null, "3rd Degree", "Tourism" },
-                    { 7, null, "3rd Degree", "Human Sciences" },
-                    { 11, null, "3rd Degree", "Commerce" },
-                    { 5, null, "3rd Degree", "Latin - Modern Languages" },
-                    { 4, null, "3rd Degree", "Latin mathematics" },
-                    { 3, null, "3rd Degree", "Science Mathematics" },
-                    { 2, null, "3rd Degree", "Engineering Sciences" },
-                    { 6, null, "3rd Degree", "latin -  Sciences" }
+                    { 1, "3A" },
+                    { 2, "4A" },
+                    { 3, "5A" },
+                    { 4, "6A" },
+                    { 5, "6B" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Locations",
+                columns: new[] { "Id", "Capacity", "ClassRoomName" },
+                values: new object[,]
+                {
+                    { 20, 15, "B105" },
+                    { 19, 20, "B104" },
+                    { 18, 30, "B103" },
+                    { 17, 20, "B102" },
+                    { 16, 25, "B101" },
+                    { 15, 25, "C105" },
+                    { 14, 15, "C104" },
+                    { 13, 15, "C103" },
+                    { 12, 20, "C102" },
+                    { 11, 30, "C101" },
+                    { 9, 15, "B104" },
+                    { 8, 15, "B103" },
+                    { 7, 20, "B102" },
+                    { 6, 20, "B101" },
+                    { 5, 25, "A105" },
+                    { 4, 20, "A104" },
+                    { 3, 30, "A103" },
+                    { 2, 15, "A102" },
+                    { 1, 25, "A101" },
+                    { 10, 30, "B105" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "StudyFields",
+                columns: new[] { "Id", "Description", "Name" },
+                values: new object[,]
+                {
+                    { 8, "", "Tourism" },
+                    { 12, "", "Logistical Maritime Administration" },
+                    { 11, "", "Commerce" },
+                    { 10, "", "Economy - Modern Languages" },
+                    { 9, "", "Economics - Mathematics" },
+                    { 7, "", "Human Sciences" },
+                    { 4, "", "Latin mathematics" },
+                    { 5, "", "Latin - Modern Languages" },
+                    { 3, "", "Science Mathematics" },
+                    { 2, "", "Engineering Sciences" },
+                    { 1, "", "Modern Language-Sciences" },
+                    { 6, "", "latin -  Sciences" }
                 });
 
             migrationBuilder.InsertData(
@@ -466,7 +504,6 @@ namespace EGakko_Web.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 32, "Economics" },
                     { 25, "Behavioral sciences" },
                     { 26, "Cultural sciences" },
                     { 27, "Human geography" },
@@ -474,25 +511,26 @@ namespace EGakko_Web.Migrations
                     { 29, "Touristic organization" },
                     { 30, "Touristic spaces" },
                     { 31, "Internship" },
+                    { 32, "Economics" },
                     { 33, "Economics law" },
-                    { 39, "Economic Geography" },
-                    { 35, "Applied computer science - Dactylo" },
                     { 36, "Accounting" },
+                    { 35, "Applied computer science - Dactylo" },
                     { 37, "Law" },
                     { 38, "Business Economics" },
-                    { 24, "Natural sciences" },
+                    { 39, "Economic Geography" },
                     { 40, "Sales" },
                     { 41, "Economics seminar" },
                     { 42, "PAV" },
                     { 43, "Applied Economics: Law" },
+                    { 24, "Natural sciences" },
                     { 34, "Logistics and maritime cases" },
                     { 23, "Seminar" },
-                    { 17, "Applied physics" },
+                    { 4, "German" },
                     { 21, "Scientific work chemistry" },
                     { 1, "Dutch" },
                     { 2, "French" },
                     { 3, "English" },
-                    { 4, "German" },
+                    { 44, "Introduction to International Trade" },
                     { 5, "Spanish" },
                     { 6, "Latin" },
                     { 7, "Mathematics" },
@@ -505,7 +543,7 @@ namespace EGakko_Web.Migrations
                     { 14, "Physical education" },
                     { 15, "Applied biochemistry" },
                     { 16, "Applied chemistry" },
-                    { 44, "Introduction to International Trade" },
+                    { 17, "Applied physics" },
                     { 18, "Applied ecology" },
                     { 19, "Applied computer science" },
                     { 20, "Scientific work physics" },

@@ -89,6 +89,33 @@ namespace EGakko_Web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Classes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClassName = "3A"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ClassName = "4A"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ClassName = "5A"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ClassName = "6A"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ClassName = "6B"
+                        });
                 });
 
             modelBuilder.Entity("EGakko_Models.ClassRoomLocation", b =>
@@ -107,6 +134,128 @@ namespace EGakko_Web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Locations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Capacity = 25,
+                            ClassRoomName = "A101"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Capacity = 15,
+                            ClassRoomName = "A102"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Capacity = 30,
+                            ClassRoomName = "A103"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Capacity = 20,
+                            ClassRoomName = "A104"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Capacity = 25,
+                            ClassRoomName = "A105"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Capacity = 20,
+                            ClassRoomName = "B101"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Capacity = 20,
+                            ClassRoomName = "B102"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Capacity = 15,
+                            ClassRoomName = "B103"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Capacity = 15,
+                            ClassRoomName = "B104"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Capacity = 30,
+                            ClassRoomName = "B105"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Capacity = 30,
+                            ClassRoomName = "C101"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Capacity = 20,
+                            ClassRoomName = "C102"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Capacity = 15,
+                            ClassRoomName = "C103"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Capacity = 15,
+                            ClassRoomName = "C104"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Capacity = 25,
+                            ClassRoomName = "C105"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Capacity = 25,
+                            ClassRoomName = "B101"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Capacity = 20,
+                            ClassRoomName = "B102"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Capacity = 30,
+                            ClassRoomName = "B103"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Capacity = 20,
+                            ClassRoomName = "B104"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Capacity = 15,
+                            ClassRoomName = "B105"
+                        });
                 });
 
             modelBuilder.Entity("EGakko_Models.ClassSchedule", b =>
@@ -1162,9 +1311,6 @@ namespace EGakko_Web.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("GradeLevel")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -1176,73 +1322,73 @@ namespace EGakko_Web.Migrations
                         new
                         {
                             Id = 1,
-                            GradeLevel = "3rd Degree",
+                            Description = "",
                             Name = "Modern Language-Sciences"
                         },
                         new
                         {
                             Id = 2,
-                            GradeLevel = "3rd Degree",
+                            Description = "",
                             Name = "Engineering Sciences"
                         },
                         new
                         {
                             Id = 3,
-                            GradeLevel = "3rd Degree",
+                            Description = "",
                             Name = "Science Mathematics"
                         },
                         new
                         {
                             Id = 4,
-                            GradeLevel = "3rd Degree",
+                            Description = "",
                             Name = "Latin mathematics"
                         },
                         new
                         {
                             Id = 5,
-                            GradeLevel = "3rd Degree",
+                            Description = "",
                             Name = "Latin - Modern Languages"
                         },
                         new
                         {
                             Id = 6,
-                            GradeLevel = "3rd Degree",
+                            Description = "",
                             Name = "latin -  Sciences"
                         },
                         new
                         {
                             Id = 7,
-                            GradeLevel = "3rd Degree",
+                            Description = "",
                             Name = "Human Sciences"
                         },
                         new
                         {
                             Id = 8,
-                            GradeLevel = "3rd Degree",
+                            Description = "",
                             Name = "Tourism"
                         },
                         new
                         {
                             Id = 9,
-                            GradeLevel = "3rd Degree",
+                            Description = "",
                             Name = "Economics - Mathematics"
                         },
                         new
                         {
                             Id = 10,
-                            GradeLevel = "3rd Degree",
+                            Description = "",
                             Name = "Economy - Modern Languages"
                         },
                         new
                         {
                             Id = 11,
-                            GradeLevel = "3rd Degree",
+                            Description = "",
                             Name = "Commerce"
                         },
                         new
                         {
                             Id = 12,
-                            GradeLevel = "3rd Degree",
+                            Description = "",
                             Name = "Logistical Maritime Administration"
                         });
                 });

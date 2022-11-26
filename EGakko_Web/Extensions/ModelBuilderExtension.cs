@@ -11,73 +11,74 @@ namespace EGakko_Web.Extensions
     {
         internal static void Seed(this ModelBuilder modelBuilder)
         {
+            
             modelBuilder.Entity<Subject>()
                  .HasData(new List<Subject>()
                  {
-                     new Subject() { Id = 1, Name = "Dutch" },
-                     new Subject() { Id = 2, Name = "French" },
-                     new Subject() { Id = 3, Name = "English" },
-                     new Subject() { Id = 4, Name = "German" },
-                     new Subject() { Id = 5, Name = "Spanish" },
-                     new Subject() { Id = 6, Name = "Latin" },
-                     new Subject() { Id = 7, Name = "Mathematics" },
-                     new Subject() { Id = 8, Name = "Geography" },
-                     new Subject() { Id = 9, Name = "History" },
-                     new Subject() { Id = 10, Name = "Biology" },
-                     new Subject() { Id = 11, Name = "Chemistry" },
-                     new Subject() { Id = 12, Name = "Physics" },
-                     new Subject() { Id = 13, Name = "Philosophical subjects" },
-                     new Subject() { Id = 14, Name = "Physical education" },
-                     new Subject() { Id = 15, Name = "Applied biochemistry" },
-                     new Subject() { Id = 16, Name = "Applied chemistry" },
-                     new Subject() { Id = 17, Name = "Applied physics" },
-                     new Subject() { Id = 18, Name = "Applied ecology" },
-                     new Subject() { Id = 19, Name = "Applied computer science" },
-                     new Subject() { Id = 20, Name = "Scientific work physics" },
-                     new Subject() { Id = 21, Name = "Scientific work chemistry" },
-                     new Subject() { Id = 22, Name = "Research competencies" },
-                     new Subject() { Id = 23, Name = "Seminar" },
-                     new Subject() { Id = 24, Name = "Natural sciences" },
-                     new Subject() { Id = 25, Name = "Behavioral sciences" },
-                     new Subject() { Id = 26, Name = "Cultural sciences" },
-                     new Subject() { Id = 27, Name = "Human geography" },
-                     new Subject() { Id = 28, Name = "Touristic culture" },
-                     new Subject() { Id = 29, Name = "Touristic organization" },
-                     new Subject() { Id = 30, Name = "Touristic spaces" },
-                     new Subject() { Id = 31, Name = "Internship" },
-                     new Subject() { Id = 32, Name = "Economics" },
-                     new Subject() { Id = 33, Name = "Economics law" },
-                     new Subject() { Id = 34, Name = "Logistics and maritime cases" },
-                     new Subject() { Id = 35, Name = "Applied computer science - Dactylo" },
-                     new Subject() { Id = 36, Name = "Accounting" },
-                     new Subject() { Id = 37, Name = "Law" },
-                     new Subject() { Id = 38, Name = "Business Economics" },
-                     new Subject() { Id = 39, Name = "Economic Geography" },
-                     new Subject() { Id = 40, Name = "Sales" },
-                     new Subject() { Id = 41, Name = "Economics seminar" },
-                     new Subject() { Id = 42, Name = "PAV" },
-                     new Subject() { Id = 43, Name = "Applied Economics: Law" },
-                     new Subject() { Id = 44, Name = "Introduction to International Trade" },
-                     new Subject() { Id = 45, Name = "Duits/Spaans" },
+                     new Subject(1, "Dutch" ),
+                     new Subject(2, "French" ),
+                     new Subject(3, "English" ),
+                     new Subject(4, "German" ),
+                     new Subject(5, "Spanish" ),
+                     new Subject(6, "Latin" ),
+                     new Subject(7, "Mathematics" ),
+                     new Subject(8, "Geography" ),
+                     new Subject(9, "History" ),
+                     new Subject(10,"Biology" ),
+                     new Subject(11,"Chemistry" ),
+                     new Subject(12,"Physics" ),
+                     new Subject(13,"Philosophical subjects" ),
+                     new Subject(14,"Physical education" ),
+                     new Subject(15,"Applied biochemistry" ),
+                     new Subject(16,"Applied chemistry" ),
+                     new Subject(17,"Applied physics" ),
+                     new Subject(18,"Applied ecology" ),
+                     new Subject(19,"Applied computer science" ),
+                     new Subject(20,"Scientific work physics" ),
+                     new Subject(21,"Scientific work chemistry" ),
+                     new Subject(22,"Research competencies" ),
+                     new Subject(23,"Seminar" ),
+                     new Subject(24,"Natural sciences" ),
+                     new Subject(25,"Behavioral sciences" ),
+                     new Subject(26,"Cultural sciences" ),
+                     new Subject(27,"Human geography" ),
+                     new Subject(28,"Touristic culture" ),
+                     new Subject(29,"Touristic organization" ),
+                     new Subject(30,"Touristic spaces" ),
+                     new Subject(31,"Internship" ),
+                     new Subject(32,"Economics" ),
+                     new Subject(33,"Economics law" ),
+                     new Subject(34,"Logistics and maritime cases" ),
+                     new Subject(35,"Applied computer science - Dactylo" ),
+                     new Subject(36,"Accounting" ),
+                     new Subject(37,"Law" ),
+                     new Subject(38,"Business Economics" ),
+                     new Subject(39,"Economic Geography" ),
+                     new Subject(40,"Sales" ),
+                     new Subject(41,"Economics seminar" ),
+                     new Subject(42,"PAV" ),
+                     new Subject(43,"Applied Economics: Law" ),
+                     new Subject(44,"Introduction to International Trade" ),
+                     new Subject(45,"Duits/Spaans" ),                                
                  });
+
             modelBuilder.Entity<StudyField>()
                 .HasData(new List<StudyField>()
                 {
-                    new StudyField {Id=1, Name="Modern Language-Sciences", GradeLevel= "3rd Degree"},
-                    new StudyField {Id=2, Name="Engineering Sciences", GradeLevel= "3rd Degree"},
-                    new StudyField {Id=3, Name="Science Mathematics", GradeLevel= "3rd Degree"},
+                    new StudyField (1,"Modern Language-Sciences",""),
+                    new StudyField (2,"Engineering Sciences",""),
+                    new StudyField (3,"Science Mathematics",""),
+                    new StudyField (4,"Latin mathematics",""),
+                    new StudyField (5,"Latin - Modern Languages",""),
+                    new StudyField (6,"latin -  Sciences",""),
 
-                    new StudyField {Id=4, Name="Latin mathematics", GradeLevel= "3rd Degree"},
-                    new StudyField {Id=5, Name="Latin - Modern Languages", GradeLevel= "3rd Degree"},
-                    new StudyField {Id=6, Name="latin -  Sciences", GradeLevel= "3rd Degree"},
+                    new StudyField (7,"Human Sciences",""),
+                    new StudyField (8,"Tourism",""),
 
-                    new StudyField {Id=7, Name="Human Sciences", GradeLevel= "3rd Degree"},
-                    new StudyField {Id=8, Name="Tourism", GradeLevel= "3rd Degree"},
-
-                    new StudyField {Id=9, Name="Economics - Mathematics", GradeLevel= "3rd Degree"},
-                    new StudyField {Id=10, Name="Economy - Modern Languages", GradeLevel= "3rd Degree"},
-                    new StudyField {Id=11, Name="Commerce", GradeLevel= "3rd Degree"},
-                    new StudyField {Id=12, Name="Logistical Maritime Administration", GradeLevel= "3rd Degree"},
+                    new StudyField (9,"Economics - Mathematics",""),
+                    new StudyField (10,"Economy - Modern Languages",""),
+                    new StudyField (11,"Commerce",""),
+                    new StudyField (12,"Logistical Maritime Administration",""),
 
                 });
 
@@ -197,7 +198,41 @@ namespace EGakko_Web.Extensions
                     new FieldSubject (){ Id =104, IsCoreSubject = false, HoursPerWeek = 1, FieldId = 2, SubjectId = 19 }, // Toegepast informatica
                  });
 
-            
+            modelBuilder.Entity<Class>()
+                .HasData(new List<Class>
+                {
+                    new Class(1,"3A"),
+                    new Class(2,"4A"),
+                    new Class(3,"5A"),
+                    new Class(4,"6A"),
+                    new Class(5,"6B"),
+                });
+
+            modelBuilder.Entity<ClassRoomLocation>()
+                .HasData(new List<ClassRoomLocation>
+                {
+                    new ClassRoomLocation(1, 25,"A101"),
+                    new ClassRoomLocation(2, 15,"A102"),
+                    new ClassRoomLocation(3, 30,"A103"),
+                    new ClassRoomLocation(4, 20,"A104"),
+                    new ClassRoomLocation(5, 25,"A105"),
+                    new ClassRoomLocation(6, 20,"B101"),
+                    new ClassRoomLocation(7, 20,"B102"),
+                    new ClassRoomLocation(8, 15,"B103"),
+                    new ClassRoomLocation(9, 15,"B104"),
+                    new ClassRoomLocation(10,30,"B105"),
+                    new ClassRoomLocation(11,30,"C101"),
+                    new ClassRoomLocation(12,20,"C102"),
+                    new ClassRoomLocation(13,15,"C103"),
+                    new ClassRoomLocation(14,15,"C104"),
+                    new ClassRoomLocation(15,25,"C105"),
+                    new ClassRoomLocation(16,25,"B101"),
+                    new ClassRoomLocation(17,20,"B102"),
+                    new ClassRoomLocation(18,30,"B103"),
+                    new ClassRoomLocation(19,20,"B104"),
+                    new ClassRoomLocation(20,15,"B105"),
+                });
         }
+
        }
 }
