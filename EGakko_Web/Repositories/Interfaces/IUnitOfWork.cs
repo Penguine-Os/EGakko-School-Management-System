@@ -8,7 +8,7 @@ namespace EGakko_Web.Repositories
 {
     public interface IUnitOfWork
     {
-        
+        public IStudyFieldRepo StudyFieldRepo { get; }
         Task Save();
     }
 }

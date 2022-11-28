@@ -13,39 +13,58 @@ namespace EGakko_Web.Repositories
 {
     public class GenericRepo<T> : IGenericRepo<T> where T : class
     {
-        private readonly ApplicationDbContext _db;
-        internal DbSet<T> _dbSet;
-        public GenericRepo(ApplicationDbContext db)
+        private readonly ApplicationDbContext _context;
+        internal DbSet<T> DbSet;
+        public GenericRepo(ApplicationDbContext context)
         {
-            _db = db;
-            _dbSet = db.Set<T>();
+            _context = context;
+            DbSet = _context.Set<T>();
         }
 
-        public async Task Add(T obj)
+        public async Task Add(T entity)
         {
-            await _dbSet.AddAsync(obj);
+           await DbSet.AddAsync(entity);
         }
 
-        public IEnumerable<T> GetAll()
+        public async Task AddRange(IEnumerable<T> items)
         {
-            IQueryable <T> Q = _dbSet;
-            return Q;
+            await DbSet.AddRangeAsync(items);
         }
 
-        public T GetByFilter(Expression<Func<T, bool>> Filters)
-        { 
-            IQueryable<T> Q = _dbSet;
-            return Q.Where(Filters).FirstOrDefault();
+        public void Delete(T entity)
+        {
+             _context.Remove(entity);
         }
 
-        public void Remove(T obj)
+        public async Task<IEnumerable<T>> GetAll()
         {
-            _dbSet.Remove(obj);
+            return  await DbSet.ToListAsync();
         }
 
-        public void RemoveRange(IEnumerable<T> items)
+        public  void RemoveRange(IEnumerable<T> items)
         {
-            _dbSet.RemoveRange(items);
+             DbSet.RemoveRange(items);
+        }
+
+        public void Update(T entity)
+        {
+            DbSet.Update(entity);
+        }
+
+        public async Task<T> GetById<Id>(Id id)
+        {
+            return await DbSet.FindAsync(id);
+        }
+
+       public async Task<IEnumerable<T>> GetListByFilter(Expression<Func<T, bool>> Filters)
+        {
+           return await DbSet.Where(Filters).ToListAsync();
+        }
+
+        public async Task<T>  GetSingleByFilter(Expression<Func<T, bool>> Filters)
+        {
+            return await DbSet.Where(Filters).FirstAsync();
+
         }
     }
 }

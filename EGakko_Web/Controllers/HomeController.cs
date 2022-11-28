@@ -1,4 +1,5 @@
 ﻿using EGakko_Web.Models;
+using EGakko_Web.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,15 +13,21 @@ namespace EGakko_Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
             return View();
+        }
+        public IActionResult Fields()
+        {
+            return View(_unitOfWork.StudyFieldRepo.GetAll().Result);
         }
 
         public IActionResult Privacy()

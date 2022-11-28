@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -10,11 +9,16 @@ namespace EGakko_Web.Repositories
 {
     public interface IGenericRepo<T> where T : class
     {
-        IEnumerable<T> GetAll();
-        Task Add(T obj);
-        T GetByFilter(Expression<Func<T, bool>> Filters);
-        void Remove (T obj);
+        Task<IEnumerable<T>> GetAll();
+        Task Add(T entity);
+        void Update(T entity);
+        void Delete(T entity);
+        Task<T> GetById<Id>(Id id);
+        Task<T> GetSingleByFilter(Expression<Func<T, bool>> Filters);
+        Task<IEnumerable<T>> GetListByFilter(Expression<Func<T, bool>> Filters);
+     
         void RemoveRange(IEnumerable<T> items);
+        Task AddRange(IEnumerable<T> items); 
     }
 
 }
