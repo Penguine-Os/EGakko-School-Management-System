@@ -68,6 +68,19 @@ namespace EGakko_Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Field",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Field", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Locations",
                 columns: table => new
                 {
@@ -79,20 +92,6 @@ namespace EGakko_Web.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Locations", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "StudyFields",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_StudyFields", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -236,36 +235,47 @@ namespace EGakko_Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Students",
+                name: "StudyFields",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    EnrollmentDate = table.Column<DateTime>(nullable: false),
-                    FeesArePayed = table.Column<bool>(nullable: false),
-                    CustomUserIdStudent = table.Column<string>(nullable: true),
-                    FieldId = table.Column<int>(nullable: false),
-                    ClassId = table.Column<int>(nullable: false)
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    FieldId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Students", x => x.Id);
+                    table.PrimaryKey("PK_StudyFields", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Students_Classes_ClassId",
-                        column: x => x.ClassId,
-                        principalTable: "Classes",
+                        name: "FK_StudyFields_Field_FieldId",
+                        column: x => x.FieldId,
+                        principalTable: "Field",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TeacherSubjects",
+                columns: table => new
+                {
+                    SubjectId = table.Column<int>(nullable: false),
+                    TeacherId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TeacherSubjects", x => new { x.SubjectId, x.TeacherId });
+                    table.ForeignKey(
+                        name: "FK_TeacherSubjects_Subjects_SubjectId",
+                        column: x => x.SubjectId,
+                        principalTable: "Subjects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Students_AspNetUsers_CustomUserIdStudent",
-                        column: x => x.CustomUserIdStudent,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Students_StudyFields_FieldId",
-                        column: x => x.FieldId,
-                        principalTable: "StudyFields",
+                        name: "FK_TeacherSubjects_Teachers_TeacherId",
+                        column: x => x.TeacherId,
+                        principalTable: "Teachers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -299,48 +309,36 @@ namespace EGakko_Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TeacherSubjects",
-                columns: table => new
-                {
-                    SubjectId = table.Column<int>(nullable: false),
-                    TeacherId = table.Column<int>(nullable: false),
-                    Id = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TeacherSubjects", x => new { x.SubjectId, x.TeacherId });
-                    table.ForeignKey(
-                        name: "FK_TeacherSubjects_Subjects_SubjectId",
-                        column: x => x.SubjectId,
-                        principalTable: "Subjects",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_TeacherSubjects_Teachers_TeacherId",
-                        column: x => x.TeacherId,
-                        principalTable: "Teachers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Attendances",
+                name: "Students",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StartDate = table.Column<DateTime>(nullable: false),
-                    EndDate = table.Column<DateTime>(nullable: false),
-                    Status = table.Column<string>(nullable: true),
-                    StudentId = table.Column<int>(nullable: false)
+                    EnrollmentDate = table.Column<DateTime>(nullable: false),
+                    FeesArePayed = table.Column<bool>(nullable: false),
+                    CustomUserIdStudent = table.Column<string>(nullable: true),
+                    FieldId = table.Column<int>(nullable: false),
+                    ClassId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Attendances", x => x.Id);
+                    table.PrimaryKey("PK_Students", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Attendances_Students_StudentId",
-                        column: x => x.StudentId,
-                        principalTable: "Students",
+                        name: "FK_Students_Classes_ClassId",
+                        column: x => x.ClassId,
+                        principalTable: "Classes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Students_AspNetUsers_CustomUserIdStudent",
+                        column: x => x.CustomUserIdStudent,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Students_StudyFields_FieldId",
+                        column: x => x.FieldId,
+                        principalTable: "StudyFields",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -416,6 +414,28 @@ namespace EGakko_Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Attendances",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StartDate = table.Column<DateTime>(nullable: false),
+                    EndDate = table.Column<DateTime>(nullable: false),
+                    Status = table.Column<string>(nullable: true),
+                    StudentId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Attendances", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Attendances_Students_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Students",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Results",
                 columns: table => new
                 {
@@ -454,49 +474,42 @@ namespace EGakko_Web.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Field",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 5, "Business Organization" },
+                    { 4, "Economics & Trade" },
+                    { 3, "STEM" },
+                    { 2, "Human Studies" },
+                    { 1, "Languages" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Locations",
                 columns: new[] { "Id", "Capacity", "ClassRoomName" },
                 values: new object[,]
                 {
-                    { 20, 15, "B105" },
+                    { 6, 20, "B101" },
+                    { 5, 25, "A105" },
+                    { 1, 25, "A101" },
+                    { 2, 15, "A102" },
+                    { 3, 30, "A103" },
+                    { 4, 20, "A104" },
                     { 19, 20, "B104" },
                     { 18, 30, "B103" },
                     { 17, 20, "B102" },
                     { 16, 25, "B101" },
-                    { 15, 25, "C105" },
+                    { 20, 15, "B105" },
                     { 14, 15, "C104" },
-                    { 13, 15, "C103" },
-                    { 12, 20, "C102" },
-                    { 11, 30, "C101" },
-                    { 9, 15, "B104" },
-                    { 8, 15, "B103" },
                     { 7, 20, "B102" },
-                    { 6, 20, "B101" },
-                    { 5, 25, "A105" },
-                    { 4, 20, "A104" },
-                    { 3, 30, "A103" },
-                    { 2, 15, "A102" },
-                    { 1, 25, "A101" },
-                    { 10, 30, "B105" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "StudyFields",
-                columns: new[] { "Id", "Description", "Name" },
-                values: new object[,]
-                {
-                    { 8, "", "Tourism" },
-                    { 12, "", "Logistical Maritime Administration" },
-                    { 11, "", "Commerce" },
-                    { 10, "", "Economy - Modern Languages" },
-                    { 9, "", "Economics - Mathematics" },
-                    { 7, "", "Human Sciences" },
-                    { 4, "", "Latin mathematics" },
-                    { 5, "", "Latin - Modern Languages" },
-                    { 3, "", "Science Mathematics" },
-                    { 2, "", "Engineering Sciences" },
-                    { 1, "", "Modern Language-Sciences" },
-                    { 6, "", "latin -  Sciences" }
+                    { 15, 25, "C105" },
+                    { 9, 15, "B104" },
+                    { 10, 30, "B105" },
+                    { 8, 15, "B103" },
+                    { 12, 20, "C102" },
+                    { 13, 15, "C103" },
+                    { 11, 30, "C101" }
                 });
 
             migrationBuilder.InsertData(
@@ -505,36 +518,36 @@ namespace EGakko_Web.Migrations
                 values: new object[,]
                 {
                     { 25, "Behavioral sciences" },
+                    { 32, "Economics" },
                     { 26, "Cultural sciences" },
                     { 27, "Human geography" },
                     { 28, "Touristic culture" },
                     { 29, "Touristic organization" },
                     { 30, "Touristic spaces" },
                     { 31, "Internship" },
-                    { 32, "Economics" },
                     { 33, "Economics law" },
-                    { 36, "Accounting" },
+                    { 43, "Applied Economics: Law" },
                     { 35, "Applied computer science - Dactylo" },
+                    { 36, "Accounting" },
                     { 37, "Law" },
                     { 38, "Business Economics" },
                     { 39, "Economic Geography" },
                     { 40, "Sales" },
                     { 41, "Economics seminar" },
                     { 42, "PAV" },
-                    { 43, "Applied Economics: Law" },
                     { 24, "Natural sciences" },
                     { 34, "Logistics and maritime cases" },
                     { 23, "Seminar" },
-                    { 4, "German" },
+                    { 8, "Geography" },
                     { 21, "Scientific work chemistry" },
                     { 1, "Dutch" },
                     { 2, "French" },
                     { 3, "English" },
-                    { 44, "Introduction to International Trade" },
+                    { 4, "German" },
                     { 5, "Spanish" },
                     { 6, "Latin" },
                     { 7, "Mathematics" },
-                    { 8, "Geography" },
+                    { 44, "Introduction to International Trade" },
                     { 9, "History" },
                     { 22, "Research competencies" },
                     { 10, "Biology" },
@@ -552,114 +565,134 @@ namespace EGakko_Web.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "StudyFields",
+                columns: new[] { "Id", "Description", "FieldId", "Name" },
+                values: new object[,]
+                {
+                    { 1, "", 1, "Modern Language-Sciences" },
+                    { 5, "", 1, "Latin - Modern Languages" },
+                    { 11, "", 1, "Economy - Modern Languages" },
+                    { 7, "", 2, "Human Sciences" },
+                    { 8, "", 2, "Tourism" },
+                    { 2, "", 3, "Engineering Sciences" },
+                    { 3, "", 3, "Science Mathematics" },
+                    { 4, "", 3, "Latin mathematics" },
+                    { 6, "", 3, "latin -  Sciences" },
+                    { 9, "", 4, "Economics - Mathematics" },
+                    { 10, "", 4, "Economy - Modern Languages" },
+                    { 12, "", 4, "Commerce" },
+                    { 13, "", 5, "Logistical Maritime Administration" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "FieldSubjects",
                 columns: new[] { "Id", "FieldId", "HoursPerWeek", "IsCoreSubject", "SubjectId" },
                 values: new object[,]
                 {
                     { 1, 1, 5, true, 1 },
-                    { 34, 3, 2, false, 14 },
-                    { 20, 2, 2, false, 14 },
-                    { 12, 1, 2, false, 14 },
-                    { 96, 2, 2, false, 13 },
-                    { 84, 7, 2, false, 13 },
-                    { 72, 6, 2, false, 13 },
-                    { 59, 5, 2, false, 13 },
-                    { 47, 4, 2, false, 13 },
-                    { 33, 3, 2, false, 13 },
-                    { 19, 2, 2, false, 13 },
-                    { 48, 4, 2, false, 14 },
-                    { 11, 1, 2, false, 13 },
-                    { 51, 4, 2, false, 12 },
-                    { 37, 3, 2, false, 12 },
-                    { 10, 1, 2, false, 12 },
-                    { 75, 6, 2, false, 11 },
-                    { 50, 4, 2, false, 11 },
-                    { 36, 3, 2, false, 11 },
-                    { 9, 1, 2, false, 11 },
-                    { 74, 6, 2, false, 10 },
-                    { 49, 4, 1, false, 10 },
                     { 35, 3, 2, false, 10 },
-                    { 76, 6, 2, false, 12 },
-                    { 21, 2, 3, false, 10 },
-                    { 60, 5, 2, false, 14 },
-                    { 85, 7, 2, false, 14 },
-                    { 4, 1, 2, false, 45 },
+                    { 34, 3, 2, false, 14 },
+                    { 33, 3, 2, false, 13 },
+                    { 32, 3, 2, false, 9 },
+                    { 31, 3, 2, false, 8 },
+                    { 30, 3, 7, true, 7 },
+                    { 29, 3, 2, false, 3 },
+                    { 28, 3, 3, false, 2 },
+                    { 27, 3, 5, true, 1 },
+                    { 104, 2, 1, false, 19 },
+                    { 36, 3, 2, false, 11 },
                     { 103, 2, 7, false, 31 },
-                    { 102, 2, 2, false, 30 },
                     { 101, 2, 2, false, 29 },
                     { 100, 2, 2, false, 28 },
-                    { 89, 7, 3, false, 26 },
-                    { 87, 7, 4, true, 25 },
+                    { 99, 2, 3, false, 5 },
                     { 98, 2, 1, false, 24 },
-                    { 88, 7, 2, false, 24 },
-                    { 63, 5, 2, false, 24 },
-                    { 73, 6, 2, false, 14 },
-                    { 86, 7, 1, false, 23 },
-                    { 61, 5, 1, false, 22 },
+                    { 97, 2, 2, false, 14 },
+                    { 96, 2, 2, false, 13 },
+                    { 95, 2, 1, false, 9 },
+                    { 94, 2, 1, false, 8 },
+                    { 93, 2, 2, true, 7 },
+                    { 92, 2, 3, false, 3 },
+                    { 102, 2, 2, false, 30 },
+                    { 91, 2, 3, false, 2 },
+                    { 37, 3, 2, false, 12 },
                     { 39, 3, 1, false, 21 },
+                    { 74, 6, 2, false, 10 },
+                    { 73, 6, 2, false, 14 },
+                    { 72, 6, 2, false, 13 },
+                    { 71, 6, 2, false, 9 },
+                    { 70, 6, 2, false, 8 },
+                    { 69, 6, 5, true, 7 },
+                    { 68, 6, 4, true, 6 },
+                    { 67, 6, 2, false, 3 },
+                    { 66, 6, 3, false, 2 },
+                    { 65, 6, 5, true, 1 },
                     { 38, 3, 1, false, 20 },
-                    { 104, 2, 1, false, 19 },
+                    { 51, 4, 2, false, 12 },
+                    { 49, 4, 1, false, 10 },
+                    { 48, 4, 2, false, 14 },
+                    { 47, 4, 2, false, 13 },
+                    { 46, 4, 2, false, 9 },
+                    { 45, 4, 1, false, 8 },
+                    { 44, 4, 7, true, 7 },
+                    { 43, 4, 4, true, 6 },
+                    { 42, 4, 2, false, 3 },
+                    { 41, 4, 3, false, 2 },
+                    { 40, 4, 5, true, 1 },
+                    { 50, 4, 2, false, 11 },
+                    { 90, 2, 4, false, 1 },
                     { 26, 2, 1, false, 19 },
                     { 25, 2, 3, false, 18 },
+                    { 62, 5, 2, false, 23 },
+                    { 61, 5, 1, false, 22 },
+                    { 60, 5, 2, false, 14 },
+                    { 59, 5, 2, false, 13 },
+                    { 58, 5, 2, false, 9 },
+                    { 57, 5, 1, false, 8 },
+                    { 56, 5, 3, true, 7 },
+                    { 55, 5, 4, true, 6 },
+                    { 54, 5, 3, false, 3 },
+                    { 53, 5, 4, false, 2 },
+                    { 63, 5, 2, false, 24 },
+                    { 52, 5, 5, true, 1 },
+                    { 11, 1, 2, false, 13 },
+                    { 10, 1, 2, false, 12 },
+                    { 9, 1, 2, false, 11 },
+                    { 8, 1, 2, false, 10 },
+                    { 7, 1, 2, false, 9 },
+                    { 6, 1, 2, false, 8 },
+                    { 5, 1, 5, true, 7 },
+                    { 4, 1, 2, false, 45 },
+                    { 3, 1, 3, false, 3 },
+                    { 2, 1, 4, true, 2 },
+                    { 12, 1, 2, false, 14 },
+                    { 64, 5, 2, false, 45 },
+                    { 77, 7, 5, true, 1 },
+                    { 78, 7, 3, false, 2 },
                     { 24, 2, 3, false, 17 },
                     { 23, 2, 3, false, 16 },
                     { 22, 2, 3, false, 15 },
-                    { 97, 2, 2, false, 14 },
-                    { 62, 5, 2, false, 23 },
-                    { 8, 1, 2, false, 10 },
-                    { 95, 2, 1, false, 9 },
-                    { 83, 7, 2, false, 9 },
-                    { 79, 7, 2, false, 3 },
-                    { 67, 6, 2, false, 3 },
-                    { 54, 5, 3, false, 3 },
-                    { 42, 4, 2, false, 3 },
-                    { 29, 3, 2, false, 3 },
-                    { 15, 2, 2, false, 3 },
-                    { 3, 1, 3, false, 3 },
-                    { 91, 2, 3, false, 2 },
-                    { 78, 7, 3, false, 2 },
-                    { 66, 6, 3, false, 2 },
-                    { 92, 2, 3, false, 3 },
-                    { 53, 5, 4, false, 2 },
-                    { 28, 3, 3, false, 2 },
-                    { 14, 2, 2, false, 2 },
-                    { 2, 1, 4, true, 2 },
-                    { 90, 2, 4, false, 1 },
-                    { 77, 7, 5, true, 1 },
-                    { 65, 6, 5, true, 1 },
-                    { 52, 5, 5, true, 1 },
-                    { 40, 4, 5, true, 1 },
-                    { 27, 3, 5, true, 1 },
-                    { 13, 2, 3, false, 1 },
-                    { 41, 4, 3, false, 2 },
-                    { 99, 2, 3, false, 5 },
-                    { 43, 4, 4, true, 6 },
-                    { 55, 5, 4, true, 6 },
-                    { 71, 6, 2, false, 9 },
-                    { 58, 5, 2, false, 9 },
-                    { 46, 4, 2, false, 9 },
-                    { 32, 3, 2, false, 9 },
+                    { 21, 2, 3, false, 10 },
+                    { 20, 2, 2, false, 14 },
+                    { 19, 2, 2, false, 13 },
                     { 18, 2, 1, false, 9 },
-                    { 7, 1, 2, false, 9 },
-                    { 94, 2, 1, false, 8 },
-                    { 82, 7, 2, false, 8 },
-                    { 70, 6, 2, false, 8 },
-                    { 57, 5, 1, false, 8 },
-                    { 45, 4, 1, false, 8 },
-                    { 31, 3, 2, false, 8 },
                     { 17, 2, 2, false, 8 },
-                    { 6, 1, 2, false, 8 },
-                    { 93, 2, 2, true, 7 },
-                    { 81, 7, 3, false, 7 },
-                    { 69, 6, 5, true, 7 },
-                    { 56, 5, 3, true, 7 },
-                    { 44, 4, 7, true, 7 },
-                    { 30, 3, 7, true, 7 },
                     { 16, 2, 4, true, 7 },
-                    { 5, 1, 5, true, 7 },
-                    { 68, 6, 4, true, 6 },
-                    { 64, 5, 2, false, 45 },
-                    { 80, 7, 2, false, 45 }
+                    { 15, 2, 2, false, 3 },
+                    { 14, 2, 2, false, 2 },
+                    { 13, 2, 3, false, 1 },
+                    { 89, 7, 3, false, 26 },
+                    { 88, 7, 2, false, 24 },
+                    { 87, 7, 4, true, 25 },
+                    { 86, 7, 1, false, 23 },
+                    { 85, 7, 2, false, 14 },
+                    { 84, 7, 2, false, 13 },
+                    { 83, 7, 2, false, 9 },
+                    { 82, 7, 2, false, 8 },
+                    { 81, 7, 3, false, 7 },
+                    { 80, 7, 2, false, 45 },
+                    { 79, 7, 2, false, 3 },
+                    { 75, 6, 2, false, 11 },
+                    { 76, 6, 2, false, 12 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -762,6 +795,11 @@ namespace EGakko_Web.Migrations
                 column: "FieldId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_StudyFields_FieldId",
+                table: "StudyFields",
+                column: "FieldId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Teachers_CustomUserIdTeacher",
                 table: "Teachers",
                 column: "CustomUserIdTeacher");
@@ -830,6 +868,9 @@ namespace EGakko_Web.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Field");
         }
     }
 }

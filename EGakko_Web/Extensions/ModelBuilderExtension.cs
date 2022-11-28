@@ -11,7 +11,18 @@ namespace EGakko_Web.Extensions
     {
         internal static void Seed(this ModelBuilder modelBuilder)
         {
-            
+
+            modelBuilder.Entity<Field>()
+                .HasData(new List<Field>
+                {
+                    new Field(1,"Languages" ),
+                    new Field(2,"Human Studies" ),
+                    new Field(3,"STEM" ),
+                    new Field(4,"Economics & Trade" ),
+                    new Field(5,"Business Organization" ),
+                });
+
+
             modelBuilder.Entity<Subject>()
                  .HasData(new List<Subject>()
                  {
@@ -65,20 +76,21 @@ namespace EGakko_Web.Extensions
             modelBuilder.Entity<StudyField>()
                 .HasData(new List<StudyField>()
                 {
-                    new StudyField (1,"Modern Language-Sciences",""),
-                    new StudyField (2,"Engineering Sciences",""),
-                    new StudyField (3,"Science Mathematics",""),
-                    new StudyField (4,"Latin mathematics",""),
-                    new StudyField (5,"Latin - Modern Languages",""),
-                    new StudyField (6,"latin -  Sciences",""),
+                    new StudyField (1, 1,"Modern Language-Sciences",""),
+                    new StudyField (2, 3,"Engineering Sciences",""),
+                    new StudyField (3, 3,"Science Mathematics",""),
+                    new StudyField (4, 3,"Latin mathematics",""),
+                    new StudyField (5, 1,"Latin - Modern Languages",""),
+                    new StudyField (6, 3,"latin -  Sciences",""),
 
-                    new StudyField (7,"Human Sciences",""),
-                    new StudyField (8,"Tourism",""),
+                    new StudyField (7, 2,"Human Sciences",""),
+                    new StudyField (8, 2,"Tourism",""),
 
-                    new StudyField (9,"Economics - Mathematics",""),
-                    new StudyField (10,"Economy - Modern Languages",""),
-                    new StudyField (11,"Commerce",""),
-                    new StudyField (12,"Logistical Maritime Administration",""),
+                    new StudyField (9, 4,"Economics - Mathematics",""),
+                    new StudyField (10, 4,"Economy - Modern Languages",""),
+                    new StudyField (11, 1,"Economy - Modern Languages",""),
+                    new StudyField (12, 4,"Commerce",""),
+                    new StudyField (13, 5,"Logistical Maritime Administration",""),
 
                 });
 

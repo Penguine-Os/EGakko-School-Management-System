@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EGakko_Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221126135945_init")]
+    [Migration("20221128135857_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -385,6 +385,49 @@ namespace EGakko_Web.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("EGakko_Models.Field", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Field");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Languages"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Human Studies"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "STEM"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Economics & Trade"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Business Organization"
+                        });
                 });
 
             modelBuilder.Entity("EGakko_Models.FieldSubject", b =>
@@ -1313,10 +1356,15 @@ namespace EGakko_Web.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("FieldId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FieldId");
 
                     b.ToTable("StudyFields");
 
@@ -1325,72 +1373,91 @@ namespace EGakko_Web.Migrations
                         {
                             Id = 1,
                             Description = "",
+                            FieldId = 1,
                             Name = "Modern Language-Sciences"
                         },
                         new
                         {
                             Id = 2,
                             Description = "",
+                            FieldId = 3,
                             Name = "Engineering Sciences"
                         },
                         new
                         {
                             Id = 3,
                             Description = "",
+                            FieldId = 3,
                             Name = "Science Mathematics"
                         },
                         new
                         {
                             Id = 4,
                             Description = "",
+                            FieldId = 3,
                             Name = "Latin mathematics"
                         },
                         new
                         {
                             Id = 5,
                             Description = "",
+                            FieldId = 1,
                             Name = "Latin - Modern Languages"
                         },
                         new
                         {
                             Id = 6,
                             Description = "",
+                            FieldId = 3,
                             Name = "latin -  Sciences"
                         },
                         new
                         {
                             Id = 7,
                             Description = "",
+                            FieldId = 2,
                             Name = "Human Sciences"
                         },
                         new
                         {
                             Id = 8,
                             Description = "",
+                            FieldId = 2,
                             Name = "Tourism"
                         },
                         new
                         {
                             Id = 9,
                             Description = "",
+                            FieldId = 4,
                             Name = "Economics - Mathematics"
                         },
                         new
                         {
                             Id = 10,
                             Description = "",
+                            FieldId = 4,
                             Name = "Economy - Modern Languages"
                         },
                         new
                         {
                             Id = 11,
                             Description = "",
-                            Name = "Commerce"
+                            FieldId = 1,
+                            Name = "Economy - Modern Languages"
                         },
                         new
                         {
                             Id = 12,
                             Description = "",
+                            FieldId = 4,
+                            Name = "Commerce"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Description = "",
+                            FieldId = 5,
                             Name = "Logistical Maritime Administration"
                         });
                 });
@@ -1908,6 +1975,15 @@ namespace EGakko_Web.Migrations
 
                     b.HasOne("EGakko_Models.StudyField", "Field")
                         .WithMany("Students")
+                        .HasForeignKey("FieldId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("EGakko_Models.StudyField", b =>
+                {
+                    b.HasOne("EGakko_Models.Field", "Field")
+                        .WithMany()
                         .HasForeignKey("FieldId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
