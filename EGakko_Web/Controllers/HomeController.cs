@@ -1,6 +1,8 @@
-﻿using EGakko_Web.Models;
+﻿using EGakko_Models;
+using EGakko_Web.Models;
 using EGakko_Web.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -27,7 +29,39 @@ namespace EGakko_Web.Controllers
         }
         public IActionResult Fields()
         {
-            return View(_unitOfWork.StudyFieldRepo.GetAll().Result);
+            StudyFieldsViewModel studyFieldsViewModel = new StudyFieldsViewModel();
+            studyFieldsViewModel.StudyFields = _unitOfWork.StudyFieldRepo.GetAll().Result;
+
+            studyFieldsViewModel.Fields = _unitOfWork.FieldRepo
+                                          .GetAll()
+                                          .Result
+                                          .Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
+
+            return View(studyFieldsViewModel);
+        }
+        public  IActionResult Search(StudyFieldsViewModel studyFieldsViewModel)
+        {
+            int fieldId = studyFieldsViewModel.FieldId;
+
+            studyFieldsViewModel.Fields = _unitOfWork.FieldRepo
+                                                      .GetAll().Result
+                                                      .Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }); ;
+
+
+            if (fieldId != 0)
+            {
+                studyFieldsViewModel.StudyFields = _unitOfWork.StudyFieldRepo
+                                                             .GetListByFilter(x => x.FieldId == fieldId)
+                                                             .Result;
+                if (studyFieldsViewModel.StudyFields.Count() == 0)
+                {
+
+                    return BadRequest();
+                }
+                return View("Fields", studyFieldsViewModel);
+            }
+
+            return BadRequest();
         }
 
         public IActionResult Privacy()

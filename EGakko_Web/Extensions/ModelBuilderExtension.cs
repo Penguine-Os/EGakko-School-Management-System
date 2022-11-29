@@ -76,21 +76,21 @@ namespace EGakko_Web.Extensions
             modelBuilder.Entity<StudyField>()
                 .HasData(new List<StudyField>()
                 {
-                    new StudyField (1, 1,"Modern Language-Sciences",""),
-                    new StudyField (2, 3,"Engineering Sciences",""),
-                    new StudyField (3, 3,"Science Mathematics",""),
-                    new StudyField (4, 3,"Latin mathematics",""),
-                    new StudyField (5, 1,"Latin - Modern Languages",""),
-                    new StudyField (6, 3,"latin -  Sciences",""),
+                    new StudyField (1, 1,"Modern Language-Sciences","","Moderne talen - wetenschappen.png"),   
+                    new StudyField (2, 3,"Engineering Sciences","","techniek- wetenschapppen.png"),
+                    new StudyField (3, 3,"Science Mathematics","","techniek- wetenschapppen.png"),
+                    new StudyField (4, 3,"Latin mathematics","","Latijn.png"),
+                    new StudyField (5, 1,"Latin - Modern Languages","","Latijn.png"),
+                    new StudyField (6, 3,"latin -  Sciences","","Latijn.png"),
 
-                    new StudyField (7, 2,"Human Sciences",""),
-                    new StudyField (8, 2,"Tourism",""),
+                    new StudyField (7, 2,"Human Sciences","","humane- wetenschappen.png"),
+                    new StudyField (8, 2,"Tourism","","toerisme.png"),
 
-                    new StudyField (9, 4,"Economics - Mathematics",""),
-                    new StudyField (10, 4,"Economy - Modern Languages",""),
-                    new StudyField (11, 1,"Economy - Modern Languages",""),
-                    new StudyField (12, 4,"Commerce",""),
-                    new StudyField (13, 5,"Logistical Maritime Administration",""),
+                    new StudyField (9, 4,"Economics - Mathematics","","Economie- wiskunde.png"),
+                    new StudyField (10, 4,"Economy - Modern Languages","","Economie- wiskunde.png"),
+                    new StudyField (11, 1,"Economy - Modern Languages","","Economie- wiskunde.png"),
+                    new StudyField (12, 4,"Commerce","","Handel.png"),
+                    new StudyField (13, 5,"Logistical Maritime Administration","","Handel.png"),
 
                 });
 

@@ -1,41 +1,67 @@
-﻿@model IEnumerable<EGakko_Models.StudyField>
+﻿@model StudyFieldsViewModel
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Field)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Field.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+
+<form class="m-2" asp-action="Search" method="get">
+
+
+    <div class="row ">
+        <div class="col my-auto" >
+            <select asp-for="FieldId" asp-items="Model.Fields" class="form-select">
+                <option disabled selected hidden>-- Select A Category --</option>
+            </select>
+   
+        </div>
+        <div class="col">
+            <input class="btn btn-outline-primary" value="Search" type="submit" />
+            <input asp-action="Fields" class="btn btn-outline-success" value="Reset" type="submit" />
+        </div>
+    </div>
+</form>
+
+<div class="card-columns m-2">
+    @foreach (var item in Model.StudyFields)
+    {
+        <div class="card">
+            <div class="card-header text-bg-dark">
+                <div class="row">
+                    <img class="col-2" style="min-width: 40px; max-height: 40px;" src="~/assets/FieldIcons/@item.IconName" />
+                    <p class="col-10" >@item.Name</p>
+                </div>
+
+
+            </div>
+
+            <div class="card-body">
+                <a onclick="showDetailModal('@(item.Name)', '@(item.Description)')" class="btn btn-outline-primary">More Info</a>
+            </div>
+        </div>
+    }
+</div>
+
+<partial name="_detailModal" />
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    
+    <script>
+        function clearData(){
+            $('#staticBackdrop .modal-body').html('');
+        }
+        function showDetailModal(title, info) {
+
+            $('#staticBackdrop .modal-title').html(title);
+            $('#staticBackdrop .modal-body').append(`<p> ${info}</p>`);
+            $('#btnModal').trigger('click');
+
+        }
+    </script>
+   
 }
-    </tbody>
-</table>
+
+
+
+@section FieldsStyleSheet {
+    @*  <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />*@
+    <link rel="stylesheet" href="~/css/FieldsStyleSheet.css" />
+
+}

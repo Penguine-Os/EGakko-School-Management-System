@@ -1,5 +1,6 @@
 ﻿using EGakko_DAL.Data;
 using EGakko_Web.Repositories.Implementations;
+using EGakko_Web.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,11 @@ namespace EGakko_Web.Repositories
         {
             _db = db;
             StudyFieldRepo = new StudyFieldRepo(db);
+            FieldRepo = new FieldRepo(db);
         }
 
         public IStudyFieldRepo StudyFieldRepo { get; private set; }
+        public IFieldRepo FieldRepo { get; private set; }
 
         public async Task Save()
         {
