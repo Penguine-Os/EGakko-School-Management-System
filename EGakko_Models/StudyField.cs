@@ -16,7 +16,7 @@ namespace EGakko_Models
         public int FieldId { get; set; }
         [ForeignKey("FieldId")]
         public Field Field { get; set; }
-
+        public string IconName { get; set; }
         public virtual List<Student> Students { get; set; }
         public virtual List<FieldSubject> FieldSubjects { get; set; }
 
@@ -24,12 +24,13 @@ namespace EGakko_Models
         {
 
         }
-        public StudyField(int id, int fieldId, string name, string desc)
+        public StudyField(int id, int fieldId, string name, string desc, string iconName)
         {
             Id = id;
             FieldId=fieldId;
             Name = name;    
             Description = desc;
+            IconName = iconName;
         }
 
     }
@@ -45,6 +46,10 @@ namespace EGakko_Models
         {
             Id = id;
             Name = name;
+        }
+        public Field()
+        {
+
         }
     }
 }

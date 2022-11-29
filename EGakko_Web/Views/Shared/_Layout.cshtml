@@ -10,7 +10,9 @@
     <title>@ViewData["Title"] - EGakko_Web</title>
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/StyleSheet_LUX.css" asp-append-version="true" />
-    
+
+    @RenderSection("IndexBg", false)
+    @RenderSection("FieldsStyleSheet", false)
     <link rel="stylesheet" href="~/css/Site.css" />
 
     <!-- Google fonts-->
@@ -21,7 +23,7 @@
   
 
 </head>
-<body class="bg-body">
+<body  class="bg-body">
 
 
     <header>
@@ -79,7 +81,7 @@
 
     
 
-    
+    <script src="~/js/addBg.js" asp-append-version="true"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
