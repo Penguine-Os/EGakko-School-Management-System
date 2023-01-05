@@ -19,6 +19,7 @@ namespace EGakko_Web.Repositories
      
         void RemoveRange(IEnumerable<T> items);
         Task AddRange(IEnumerable<T> items); 
+
     }
 
 }

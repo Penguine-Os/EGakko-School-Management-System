@@ -63,6 +63,16 @@ namespace EGakko_Web.Controllers
 
             return BadRequest();
         }
+        public async Task<IActionResult> Teachers()
+        {
+
+            var task=  _unitOfWork.TeacherRepo.GetAllJoined(x => x.CustomUserTeacher);
+
+            task.Result.ToList().ForEach(x => x.Subjects = _unitOfWork.TeacherRepo.GetTeacherSubjects(x.Id).Result.ToList());
+         
+
+            return View(await task);
+        }
 
         public IActionResult Privacy()
         {

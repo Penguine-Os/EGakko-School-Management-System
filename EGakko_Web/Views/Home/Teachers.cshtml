@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Teacher>;
+
+
+<div class="card-columns m-2">
+    @foreach (var teacher in Model)
+    {
+        <div class="card">
+            <div class="card-header text-bg-dark">
+                <div class="row">
+                    @(teacher.CustomUserTeacher.FName + ' ' + teacher.CustomUserTeacher.LName)
+                </div>
+
+
+            </div>
+
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    @foreach (var subject in teacher.Subjects)
+                    {
+                        <li class="list-group-item">@subject.Subject.Name</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+</div>
+
+@section FieldsStyleSheet {
+    @*  <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />*@
+    <link rel="stylesheet" href="~/css/TeacherStyleSheet.css" />
+
+}
