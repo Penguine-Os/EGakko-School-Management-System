@@ -1,0 +1,70 @@
+﻿@model AdminViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+
+    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
+    </a>
+</div>
+
+    <div class="card shadow bg-dark " >
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary text-light">Users</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>First Name</th>
+                            <th>Email</th>
+                            <th>Birth Date</th>
+                            <th>Sex</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model.Users)
+                        {
+                            <tr>
+                                <td>@user.FName</td>
+                                <td>@user.LName</td>
+                                <td>@user.Email</td>
+                                <td>@user.BirthDate.Value.ToShortDateString()</td>
+                                <td>@user.Gender.ToString()</td>
+                                <td class="col-3">
+
+                                    <div class=" d-flex justify-content-around">
+                                        <a asp-controller="AdminDashboard" asp-action="UpdateUser" asp-route-id=""
+                                       class="w-100 me-2 btn btn-outline-warning">Update</a>
+                                        <a asp-controller="AdminDashboard" asp-action="DeleteUser" asp-route-id=""
+                                       class="w-100 ms-2 btn btn-outline-danger">Delete</a>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+
+@section Scripts {
+    <!-- Page level plugins -->
+    <script src="~/DashboardAssets/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/DashboardAssets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="~/DashboardAssets/js/demo/datatables-demo.js"></script>
+
+}

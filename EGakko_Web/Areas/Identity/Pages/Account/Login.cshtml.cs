@@ -81,8 +81,12 @@ namespace EGakko_Web.Areas.Identity.Pages.Account
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+               
                 if (result.Succeeded)
                 {
+                    string controllerName = GetControllerName();
+                    returnUrl =  Url.Content($"~/{controllerName}");
+                  
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }
@@ -104,6 +108,30 @@ namespace EGakko_Web.Areas.Identity.Pages.Account
 
             // If we got this far, something failed, redisplay form
             return Page();
+        }
+
+        private string GetControllerName()
+        {
+            string controllerName = string.Empty;
+            var user = _userManager.FindByEmailAsync(Input.Email).Result;
+            var role = _userManager.GetRolesAsync(user).Result.FirstOrDefault();
+
+            switch (role)
+            {
+                case "admin":
+                    controllerName = "AdminDashboard";
+                    break;
+                case "teacher":
+                    controllerName = "TeacherDashboard";
+                    break;
+                case "student":
+                    controllerName = "StudentDashboard";
+                    break;
+                default:
+                    break;
+            }
+
+            return controllerName;
         }
     }
 }

@@ -1,7 +1,20 @@
 ﻿@using Microsoft.AspNetCore.Hosting
+@using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Mvc.ViewEngines
+@inject SignInManager<CustomUser> SignInManager
+@inject UserManager<CustomUser> UserManager
 @inject IWebHostEnvironment Environment
-@inject ICompositeViewEngine Engine 
+@inject ICompositeViewEngine Engine
+@{
+    CustomUser user = new CustomUser();
+    string role = "";
+    @if (SignInManager.IsSignedIn(User))
+    {
+        user = UserManager.FindByEmailAsync(User.Identity.Name).Result;
+        role = UserManager.GetRolesAsync(user).Result.FirstOrDefault();
+    }
+
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +26,7 @@
 
     @RenderSection("IndexBg", false)
     @RenderSection("FieldsStyleSheet", false)
+
     <link rel="stylesheet" href="~/css/Site.css" />
 
     <!-- Google fonts-->
@@ -20,10 +34,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,600;1,600&amp;display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,500;0,600;0,700;1,300;1,500;1,600;1,700&amp;display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet" />
-  
+
 
 </head>
-<body  class="bg-body">
+<body class="bg-body">
 
 
     <header>
@@ -36,16 +50,30 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav ms-auto flex-nowrap">
-                       
-                        <li class="nav-item">
-                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Fields">Fields</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Teachers">Teachers</a>
-                        </li>
+                        @if (!SignInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Fields">Fields</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Teachers">Teachers</a>
+                            </li>
+                        }
+                        @if (role == "admin")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="AdminDashboard" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="AdminDashboard" asp-action="Fields">Manage Accounts</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="AdminDashboard" asp-action="Fields">Add Account</a>
+                            </li>
+                        }
                         @{
                             var result = Engine.FindView(ViewContext, "_LoginPartial", isMainPage: false);
                         }
@@ -60,8 +88,8 @@
                             $"we have looked at it in the following locations: {System.Environment.NewLine}{string.Join(System.Environment.NewLine, result.SearchedLocations)}.");
                         }
 
-                     
-                        
+
+
                     </ul>
                 </div>
             </div>
@@ -73,18 +101,19 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - test - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+    @*    <footer class="border-top footer text-muted">
+    <div class="container">
+    &copy; 2022 - test - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </div>
     </footer>
 
-    
+    *@
 
     <script src="~/js/addBg.js" asp-append-version="true"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

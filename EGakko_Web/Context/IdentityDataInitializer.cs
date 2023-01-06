@@ -1094,9 +1094,12 @@ namespace EGakko_Web.Context
                         City= "Jinchang",
                         BirthDate= new DateTime(2004,7,20),
                         Gender= (Gender)1
-                    },
+                    }
+                };
 
-                new CustomUser
+            List<CustomUser> defaultUsers = new List<CustomUser>
+            {
+                          new CustomUser
                     {
                         Email= "gdunridge2d@europa.eu",
                         FName= "Gordy",
@@ -1276,7 +1279,8 @@ namespace EGakko_Web.Context
                         BirthDate= new DateTime(2004,5,06),
                         Gender= 0
                     }
-                };
+            }
+
             string password = "Egakko_92";
 
             foreach (var cTeacher in customUserTeacher)
@@ -1321,6 +1325,30 @@ namespace EGakko_Web.Context
                         IdentityRole role = await roleManager.FindByNameAsync("student");
                         userManager.AddToRoleAsync(cStudent, role.Name).Wait();
                         var student = new Student(cStudent.Id, 0, 0);
+                        applicationDbContext.Students.Add(student);
+                    }
+
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+            }
+
+            foreach (var defaultUser in defaultUsers)
+            {
+                if (userManager.FindByEmailAsync(defaultUser.Email).Result != null)
+                    continue;
+                try
+                {
+                    defaultUser.UserName = defaultUser.Email;
+                    IdentityResult result = await userManager.CreateAsync(defaultUser, password);
+                    if (result.Succeeded)
+                    {
+                        IdentityRole role = await roleManager.FindByNameAsync("default");
+                        userManager.AddToRoleAsync(defaultUser, role.Name).Wait();
+                        var student = new Student(defaultUser.Id, 0, 0);
                         applicationDbContext.Students.Add(student);
                     }
 

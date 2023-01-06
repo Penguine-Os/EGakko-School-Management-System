@@ -1,6 +1,7 @@
 ﻿using EGakko_Models;
 using EGakko_Web.Models;
 using EGakko_Web.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
@@ -16,9 +17,10 @@ namespace EGakko_Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IUnitOfWork _unitOfWork;
-
-        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
+        private readonly SignInManager<CustomUser> _signInManager;
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork,SignInManager<CustomUser> signInManager)
         {
+            _signInManager = signInManager;
             _logger = logger;
             _unitOfWork = unitOfWork;
         }
@@ -26,6 +28,12 @@ namespace EGakko_Web.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+        public async Task<IActionResult> SignOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("index", "Home");
+
         }
         public IActionResult Fields()
         {
