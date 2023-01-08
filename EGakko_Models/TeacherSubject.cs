@@ -16,5 +16,15 @@ namespace EGakko_Models
         public int TeacherId { get; set; }
         [ForeignKey("TeacherId")]
         public virtual Teacher Teacher { get; set; }
+        public TeacherSubject(int id, int teacherId, int subjectId)
+        {
+            Id = id;
+            SubjectId = subjectId;
+            TeacherId = teacherId;
+        }
+        public TeacherSubject()
+        {
+
+        }
     }
 }

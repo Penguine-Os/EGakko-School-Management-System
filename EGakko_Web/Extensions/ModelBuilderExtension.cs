@@ -244,7 +244,27 @@ namespace EGakko_Web.Extensions
                     new ClassRoomLocation(19,20,"B104"),
                     new ClassRoomLocation(20,15,"B105"),
                 });
+
+            modelBuilder.Entity<TeacherSubject>()
+               .HasData(new List<TeacherSubject>
+               {
+                    new TeacherSubject(1,1,3),
+                    new TeacherSubject(2,1,4),
+                    new TeacherSubject(3,2,8),
+                    new TeacherSubject(4,2,9),
+                    new TeacherSubject(5,3,2),
+                    new TeacherSubject(6,3,5),
+                    new TeacherSubject(7,3,6),
+                    new TeacherSubject(8,3,45),
+                    new TeacherSubject(9,4,7),
+                    new TeacherSubject(10,4,12),
+                    new TeacherSubject(11,5,10),
+                    new TeacherSubject(12,5,11),
+                    new TeacherSubject(13,5,24),
+                    new TeacherSubject(14,5,18)
+               });
         }
 
-       }
+    }
+
 }
