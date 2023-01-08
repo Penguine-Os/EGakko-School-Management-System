@@ -11,19 +11,19 @@ namespace EGakko_Models
         public int Id { get; set; }
         public DateTime EnrollmentDate { get; set; }
         public bool FeesArePayed { get; set; }
-      
+
 
         // Navigational Properties
         public string CustomUserIdStudent { get; set; }
         [ForeignKey("CustomUserIdStudent")]
         public virtual CustomUser CustomUserStudent { get; set; }
 
-        public int FieldId { get; set; }
+        public int? FieldId { get; set; }
         [ForeignKey("FieldId")]
         public virtual StudyField Field { get; set; }
 
-        
-        public int ClassId { get; set; }
+
+        public int? ClassId { get; set; }
         [ForeignKey("ClassId")]
         public virtual Class Class { get; set; }
 
@@ -35,11 +35,10 @@ namespace EGakko_Models
         {
 
         }
-        public Student(string id, int fieldId, int classId)
+        public Student(string id, DateTime date)
         {
             CustomUserIdStudent = id;
-            FieldId = fieldId;
-            ClassId = classId;
+            EnrollmentDate = date;
         }
 
     }

@@ -20,12 +20,16 @@ namespace EGakko_Web.Repositories
             StudyFieldRepo = new StudyFieldRepo(db);
             FieldRepo = new FieldRepo(db);
             TeacherRepo = new TeacherRepo(db);
+            StudentRepo = new StudentRepo(db);
+            ClassRepo = new GenericRepo<EGakko_Models.Class>(db);
         }
+
 
         public IStudyFieldRepo StudyFieldRepo { get; private set; }
         public IFieldRepo FieldRepo { get; private set; }
         public ITeacherRepo TeacherRepo { get; set; }
-
+        public IStudentRepo StudentRepo { get; set; }
+        public IGenericRepo<EGakko_Models.Class> ClassRepo { get; set; }
         public async Task Save()
         {
             await _db.SaveChangesAsync();

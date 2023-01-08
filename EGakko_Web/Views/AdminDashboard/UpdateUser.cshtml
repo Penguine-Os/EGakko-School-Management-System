@@ -1,4 +1,4 @@
-﻿@model AdminViewModel
+﻿@model UpdateUserViewModel
 <div class="d-sm-flex align-items-center justify-content-between my-4">
 
     <h1 class="h3 mb-0 text-gray-800">Update User</h1>
@@ -6,88 +6,114 @@
 </div>
 <div class="card shadow bg-dark ">
     <div class="card-header py-3">
-        <form class="container">
-
+        <form class="container" asp-action="UpdateUser">
+            <input type="hidden" asp-for="CustomUserId" />
+            <input type="hidden" asp-for="StudentId" />
+            <input type="hidden" asp-for="TeacherId" />
+            <input type="hidden" asp-for="Role" />
             <div class="row row-cols-1 row-cols-md-2">
                 @*Column one*@
                 <div class="col">
                     <div class="form-group my-3">
-                        <input type="email" class="form-control"  placeholder="First Name">
+                        <input asp-for="CustomUserFirstName" type="text" class="form-control" placeholder="First Name">
+                        <span asp-validation-for="CustomUserFirstName" class="text-danger"></span>
                     </div>
                     <div class="form-group my-3">
-                        <input type="email" class="form-control"  placeholder="Last Name">
+                        <input asp-for="CustomUserLastName" type="text" class="form-control" placeholder="Last Name">
+                        <span asp-validation-for="CustomUserLastName" class="text-danger"></span>
                     </div>
                     <div class="form-group my-3">
-                        <input type="email" class="form-control"  placeholder="Email Adress">
+                        <input asp-for="CustomUserEmail" type="email" class="form-control" placeholder="Email Adress">
+                        <span asp-validation-for="CustomUserEmail" class="text-danger"></span>
                     </div>
                     <div class="form-group my-3">
-                        <input type="email" class="form-control"  placeholder="Street">
+                        <input asp-for="CustomUserStreet" type="text" class="form-control" placeholder="Street">
+                        <span asp-validation-for="CustomUserStreet" class="text-danger"></span>
                     </div>
                     <div class="form-group my-3">
-                        <input type="email" class="form-control" placeholder="House Number">
+                        <input asp-for="CustomUserHouseNumber" type="text" class="form-control" placeholder="House Number">
                     </div>
                     <div class="form-group my-3">
-                        <input type="email" class="form-control" placeholder="ZipCode">
+                        <input asp-for="CustomUserZipCode" type="text" class="form-control" placeholder="ZipCode">
                     </div>
                     <div class="form-group my-3">
-                        <input type="email" class="form-control" placeholder="City">
+                        <input asp-for="CustomUserCity" type="text" class="form-control" placeholder="City">
+                        <span asp-validation-for="CustomUserCity" class="text-danger"></span>
                     </div>
                     <div class="form-group my-3">
-                        <input type="date" class="form-control" >
+                        <input asp-for="CustomUserBirthDate" type="date" class="form-control">
+                        
                     </div>
-               
+
                 </div>
                 @*Column two*@
                 <div class="col">
-                    <div class="form-group my-3">
-                        <input  class="form-control" placeholder="Salary">
-                    </div>
-                     <div class="form-group my-3">
-                        <input type="text" class="form-control" placeholder="Diploma Title">
-                    </div>
-                     <div class="form-group my-3">
-                        <input type="text" class="form-control" placeholder="Diploma Title">
-                    </div>
-                     <div class="form-group my-3">
-                        
-                         <select style="height: 3rem" class="form-select" aria-label="Fees Are Payed?">
-                             <option disabled selected hidden >Fees Are Payed?</option>
-                             <option  value="true">Payed</option>
-                             <option value="false">Not Payed</option>
-                         </select>
-                    </div>
-                        
-                     <div class="form-group my-3">
-                        
-                         <select style="height: 3rem" class="form-select" aria-label="Select Class">
-                             <option disabled selected hidden >Select Class</option>
-                             <option  value="true">Payed</option>
-                             <option value="false">Not Payed</option>
-                         </select>
-                    </div>
-                        
-                     <div class="form-group my-3">
-                        
-                         <select style="height: 3rem" class="form-select" aria-label="Select Field">
-                             <option disabled selected hidden >Select Field</option>
-                             <option  value="true">Payed</option>
-                             <option value="false">Not Payed</option>
-                         </select>
-                    </div>
-                        
-                         <div class="input-group my-3 form-group  ">
+                    @if (Model.Role == "teacher")
+                    {
+                        <div class="form-group my-3">
+                            <input class="form-control" asp-for="TeacherSalery" placeholder="Salary">
+                        </div>
+                        <div class="form-group my-3">
+                            <input type="text" class="form-control" asp-for="TeacherDiploma" placeholder="Diploma Title">
+                            
+                        </div>
+                    }
+                    @if (Model.Role == "student")
+                    {
+                        <div class="form-group my-3">
+
+                            <select style="height: 3rem" class="form-select" aria-label="Fees Are Payed?" asp-for="StudentFeesArePayed">
+                                <option disabled selected hidden>Fees Are Payed?</option>
+                                <option value="true">Payed</option>
+                                <option value="false">Not Payed</option>
+                            </select>
+                          
+                        </div>
+
+                        <div class="form-group my-3">
+
+                            <select style="height: 3rem" class="form-select" aria-label="Select Class"
+                                asp-for="StudentClassId" asp-items="Model.Classes">
+                                <option disabled selected hidden>Select Class</option>
+                            </select>
+
+                        </div>
+
+                        <div class="form-group my-3">
+
+                            <select style="height: 3rem" class="form-select" aria-label="Select Field" 
+                            asp-for="StudentFieldId" asp-items="Model.Fields">
+                                <option disabled selected hidden>Select Field</option>
+                            </select>
+                        </div>
+                    }
+
+
+                    <div class="input-group my-3 form-group  ">
                         @*<select asp-items="@Html.GetEnumSelectList<Gender>()"></select>*@
                         <select style="height: 3rem" asp-items="@Html.GetEnumSelectList<Gender>()" class="form-select">
                             <option disabled selected hidden>Select Your Sex</option>
 
                         </select>
-                    </div
+                    </div>
+                    
+                    <div class="d-grid mt-3">
+                        <button type="submit" class="btn btn-outline-warning">Update</button>
+                    </div>
+                    <div class="d-grid my-3">
+                        <a class="btn btn-outline-success"
+                           href="@Url.Action("index", "AdminDashboard")">Return</a>
+                    </div>
+
                 </div>
-                <div class="d-grid mt-3">
-                    <button type="submit" class="btn btn-outline-success">Update</button>
-                </div>
+                
             </div>
         </form>
-        
+
     </div>
 </div>
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

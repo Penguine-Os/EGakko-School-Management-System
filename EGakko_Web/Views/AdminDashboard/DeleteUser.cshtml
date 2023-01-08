@@ -1,0 +1,45 @@
+﻿@model CustomUser
+@{
+    var donut = Model;
+}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  
+</div>
+
+<div class="card shadow bg-dark2">
+    <div class="card-header py-3 bg-dark" >
+        <h6 class="m-0 font-weight-bold text-primary text-light">Delete User</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+             
+                <tbody>
+                    @foreach (var item in Model.GetType().GetProperties())
+                    {
+                        <tr>
+                            <td>
+                                @(item.Name)
+                            </td>
+                            <td>
+                                @item.GetValue(Model)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <form asp-action="DeleteUser" style="padding: 0.5rem" method="post"> 
+            <input type="hidden" asp-for="Id" />
+            <div class="col">
+                <a class="btn btn-outline-success"
+                   href="@Url.Action("ManageAccounts", "AdminDashboard")">Return</a>
+                <button type="submit" value="Delete" class=" btn btn-outline-danger">Delete</button>
+            </div>
+
+        </form>
+        </div
+    </div>
+</div>
+
+
+

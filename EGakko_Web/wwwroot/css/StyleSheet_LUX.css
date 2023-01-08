@@ -3127,7 +3127,7 @@ textarea.form-control-lg {
 
 .btn {
     --bs-btn-padding-x: 1.5rem;
-    --bs-btn-padding-y: 0.75rem;
+ /*   --bs-btn-padding-y: 0.75rem;*/
     --bs-btn-font-family:;
     --bs-btn-font-size: 1rem;
     --bs-btn-font-weight: 600;
@@ -8730,6 +8730,10 @@ textarea.form-control-lg {
     --bs-bg-opacity: 1;
     background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
 }
+.bg-dark2 {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var( --bs-gray-dark), var(--bs-bg-opacity)) !important;
+}
 
 .bg-black {
     --bs-bg-opacity: 1;
@@ -12281,8 +12285,7 @@ th {
     text-transform: uppercase;
 }
 
-.table th,
-.table td {
+.table th{
     padding: 1.5rem;
 }
 

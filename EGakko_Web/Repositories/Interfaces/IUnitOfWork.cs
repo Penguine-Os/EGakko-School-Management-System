@@ -13,6 +13,8 @@ namespace EGakko_Web.Repositories
         public IStudyFieldRepo StudyFieldRepo { get; }
         public IFieldRepo FieldRepo { get; }
         ITeacherRepo TeacherRepo { get; set; }
+        IStudentRepo StudentRepo { get; set; }
+        IGenericRepo<EGakko_Models.Class> ClassRepo { get; set; }
 
         Task Save();
     }

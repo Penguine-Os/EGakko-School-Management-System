@@ -18,7 +18,7 @@ namespace EGakko_Web.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IUnitOfWork _unitOfWork;
         private readonly SignInManager<CustomUser> _signInManager;
-        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork,SignInManager<CustomUser> signInManager)
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork, SignInManager<CustomUser> signInManager)
         {
             _signInManager = signInManager;
             _logger = logger;
@@ -47,7 +47,7 @@ namespace EGakko_Web.Controllers
 
             return View(studyFieldsViewModel);
         }
-        public  IActionResult Search(StudyFieldsViewModel studyFieldsViewModel)
+        public IActionResult Search(StudyFieldsViewModel studyFieldsViewModel)
         {
             int fieldId = studyFieldsViewModel.FieldId;
 
@@ -71,15 +71,15 @@ namespace EGakko_Web.Controllers
 
             return BadRequest();
         }
-        public async Task<IActionResult> Teachers()
+        public IActionResult Teachers()
         {
 
-            var task=  _unitOfWork.TeacherRepo.GetAllJoined(x => x.CustomUserTeacher);
+            var task = _unitOfWork.TeacherRepo.GetAllJoined(x => x.CustomUserTeacher).Result;
 
-            task.Result.ToList().ForEach(x => x.Subjects = _unitOfWork.TeacherRepo.GetTeacherSubjects(x.Id).Result.ToList());
-         
+            task.ToList().ForEach(x => x.Subjects = _unitOfWork.TeacherRepo.GetTeacherSubjects(x.Id).Result.ToList());
 
-            return View(await task);
+
+            return View(task);
         }
 
         public IActionResult Privacy()
