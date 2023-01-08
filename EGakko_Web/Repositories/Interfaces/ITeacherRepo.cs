@@ -9,10 +9,10 @@ namespace EGakko_Web.Repositories.Interfaces
 {
     public interface ITeacherRepo : IGenericRepo<Teacher>
     {
-         Task<IEnumerable<Teacher>> GetAllJoined(params Expression<Func<Teacher, object>>[] includes);
+        IEnumerable<Teacher> GetAllJoined(params Expression<Func<Teacher, object>>[] includes);
 
-        Task<IEnumerable<Teacher>> GetAllJoined(Expression<Func<Teacher, bool>> voorwaarden,
+        IEnumerable<Teacher> GetAllJoined(Expression<Func<Teacher, bool>> voorwaarden,
             params Expression<Func<Teacher, object>>[] includes);
-        Task<IEnumerable<TeacherSubject>> GetTeacherSubjects(int teacherId);
+        IEnumerable<TeacherSubject> GetTeacherSubjects(int teacherId);
     }
 }

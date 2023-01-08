@@ -36,9 +36,9 @@ namespace EGakko_Web.Repositories
              _context.Remove(entity);
         }
 
-        public async Task<IEnumerable<T>> GetAll()
+        public  IEnumerable<T> GetAll()
         {
-            return  await DbSet.ToListAsync();
+            return   DbSet.ToList();
         }
 
         public  void RemoveRange(IEnumerable<T> items)

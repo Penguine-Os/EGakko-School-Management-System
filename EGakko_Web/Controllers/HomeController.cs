@@ -38,11 +38,10 @@ namespace EGakko_Web.Controllers
         public IActionResult Fields()
         {
             StudyFieldsViewModel studyFieldsViewModel = new StudyFieldsViewModel();
-            studyFieldsViewModel.StudyFields = _unitOfWork.StudyFieldRepo.GetAll().Result;
+            studyFieldsViewModel.StudyFields = _unitOfWork.StudyFieldRepo.GetAll();
 
             studyFieldsViewModel.Fields = _unitOfWork.FieldRepo
                                           .GetAll()
-                                          .Result
                                           .Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
 
             return View(studyFieldsViewModel);
@@ -52,7 +51,7 @@ namespace EGakko_Web.Controllers
             int fieldId = studyFieldsViewModel.FieldId;
 
             studyFieldsViewModel.Fields = _unitOfWork.FieldRepo
-                                                      .GetAll().Result
+                                                      .GetAll()
                                                       .Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }); ;
 
 
@@ -74,9 +73,9 @@ namespace EGakko_Web.Controllers
         public IActionResult Teachers()
         {
 
-            var task = _unitOfWork.TeacherRepo.GetAllJoined(x => x.CustomUserTeacher).Result;
+            var task = _unitOfWork.TeacherRepo.GetAllJoined(x => x.CustomUserTeacher);
 
-            task.ToList().ForEach(x => x.Subjects = _unitOfWork.TeacherRepo.GetTeacherSubjects(x.Id).Result.ToList());
+            task.ToList().ForEach(x => x.Subjects = _unitOfWork.TeacherRepo.GetTeacherSubjects(x.Id).ToList());
 
 
             return View(task);

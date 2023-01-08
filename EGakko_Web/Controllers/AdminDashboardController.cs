@@ -42,7 +42,7 @@ namespace EGakko_Web.Controllers
                 {
                     AdminViewModel.StudentsAndTeacher.Add(user);
                 }
-                else
+                else if(_userManager.IsInRoleAsync(user, "defaultUser").Result)
                 {
                     AdminViewModel.UsersWithoutRoles.Add(user);
                 }
@@ -161,10 +161,10 @@ namespace EGakko_Web.Controllers
 
                 var student = _unitOfWork.StudentRepo
                     .GetSingleByFilter(x => x.CustomUserIdStudent == user.Id).Result;
-                vm.Classes = _unitOfWork.ClassRepo.GetAll()
-                    .Result.Select(s => new SelectListItem { Text= s.ClassName, Value = s.Id.ToString() }).ToList();
-                vm.Fields = _unitOfWork.StudyFieldRepo.GetAll()
-                     .Result.Select(f => new SelectListItem { Text = f.Name, Value = f.Id.ToString()}).ToList();
+                vm.Classes = _unitOfWork.ClassRepo.GetAll().
+                    Select(s => new SelectListItem { Text= s.ClassName, Value = s.Id.ToString() }).ToList();
+                vm.Fields = _unitOfWork.StudyFieldRepo.GetAll().
+                    Select(f => new SelectListItem { Text = f.Name, Value = f.Id.ToString()}).ToList();
                 vm.StudentId = student.Id;
                 vm.StudentFeesArePayed = student.FeesArePayed;
                 vm.StudentClassId = student.ClassId;
@@ -193,15 +193,15 @@ namespace EGakko_Web.Controllers
         {
             var user = _userManager.Users.Where(x => x.Id == customUser.Id).FirstOrDefault();
             if (user == null)
-                return View();
+                RedirectToAction("index");
 
-            _userManager.DeleteAsync(user);
+            _userManager.DeleteAsync(user).Wait();
             var role = _userManager.GetRolesAsync(user).Result.FirstOrDefault();
 
             if (role == "teacher")
             {
                 var teacher = _unitOfWork.TeacherRepo
-                    .GetAllJoined(t => t.CustomUserTeacher).Result
+                    .GetAllJoined(t => t.CustomUserTeacher)
                     .Where(cu => cu.CustomUserIdTeacher == user.Id).FirstOrDefault();
 
                 _unitOfWork.TeacherRepo.Delete(teacher);
@@ -210,14 +210,14 @@ namespace EGakko_Web.Controllers
             {
 
                 var teacher = _unitOfWork.TeacherRepo
-                    .GetAllJoined(t => t.CustomUserTeacher).Result
+                    .GetAllJoined(t => t.CustomUserTeacher)
                     .Where(cu => cu.CustomUserIdTeacher == user.Id).FirstOrDefault();
 
                 _unitOfWork.TeacherRepo.Delete(teacher);
             }
             // return RedirectToAction("Donuts");
 
-            return View(AdminViewModel);
+            return RedirectToAction("index");
         }
 
 

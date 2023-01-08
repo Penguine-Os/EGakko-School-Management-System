@@ -19,13 +19,13 @@ namespace EGakko_Web.Repositories.Implementations
             _context = context;
         }
 
-        public Task<IEnumerable<Student>> GetAllJoined(params Expression<Func<Student, object>>[] includes)
+        public IEnumerable<Student> GetAllJoined(params Expression<Func<Student, object>>[] includes)
         {
 
             return GetAllJoined(null, includes);
         }
 
-        public async Task<IEnumerable<Student>> GetAllJoined(Expression<Func<Student, bool>> voorwaarden, params Expression<Func<Student, object>>[] includes)
+        public  IEnumerable<Student> GetAllJoined(Expression<Func<Student, bool>> voorwaarden, params Expression<Func<Student, object>>[] includes)
         {
             IQueryable<Student> query = _context.Set<Student>();
             if (includes != null)
@@ -39,7 +39,7 @@ namespace EGakko_Web.Repositories.Implementations
             {
                 query = query.Where(voorwaarden);
             }
-            return await query.ToListAsync();
+            return  query.ToList();
         }
     }
 }

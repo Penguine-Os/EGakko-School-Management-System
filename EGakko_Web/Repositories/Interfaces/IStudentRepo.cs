@@ -9,9 +9,9 @@ namespace EGakko_Web.Repositories.Interfaces
     public interface IStudentRepo : IGenericRepo<Student>
     {
 
-        Task<IEnumerable<Student>> GetAllJoined(params Expression<Func<Student, object>>[] includes);
+        IEnumerable<Student> GetAllJoined(params Expression<Func<Student, object>>[] includes);
 
-        Task<IEnumerable<Student>> GetAllJoined(Expression<Func<Student, bool>> voorwaarden,
+        IEnumerable<Student> GetAllJoined(Expression<Func<Student, bool>> voorwaarden,
             params Expression<Func<Student, object>>[] includes);
 
     }

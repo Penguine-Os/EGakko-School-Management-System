@@ -37,8 +37,7 @@ namespace EGakko_Web
                     logger.LogError(ex, "Error opgetreden, while seeding the database.");
                 }
             }
-            //IdentityDataInitializer.CreateRoles(serviceProvider);
-            //IdentityDataInitializer.SeedIdentityUsers(userManager, roleManager);
+
 
             host.Run();
         }

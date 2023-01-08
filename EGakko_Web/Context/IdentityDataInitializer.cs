@@ -16,59 +16,59 @@ namespace EGakko_Web.Context
         public static async Task SeedIdentityUsers(UserManager<CustomUser> userManager, RoleManager<IdentityRole> roleManager, ApplicationDbContext applicationDbContext)
         {
 
-            if (userManager.Users.Count() > 0)
-                return;
+            //if (userManager.Users.Count() > 0)
+            //    return;
             string password = "Egakko_92";
 
             #region Teachers
-            List<CustomUser> customUserTeacher = new List<CustomUser>
-                        {
-                            new CustomUser {
-                                Email = "mbritten0@msn.com",
-                                FName = "Marty",
-                                LName = "Britten",
-                                Street = "Sunnyside",
-                                HouseNumber = 9,
-                                ZipCode = "19-101",
-                                City = "Mońki",
-                                BirthDate = new DateTime(1991,05,13),Gender = (Gender)1},
-                            new CustomUser {
-                                Email = "hcroot1@bbc.co.uk",
-                                FName = "Paula",
-                                LName = "Croot",
-                                Street = "Nevada",
-                                HouseNumber = 7,
-                                ZipCode = "CB4",
-                                City = "Church End",
-                                BirthDate = new DateTime(1981,12,13),Gender = (Gender)1},
-                            new CustomUser {
-                                Email = "lwarby2@abc.net.au",
-                                FName = "Scooby",
-                                LName = "Warby",
-                                Street = "Luster",
-                                HouseNumber = 70,
-                                ZipCode = "59347-000",
-                                City = "Ouro Branco",
-                                BirthDate = new DateTime(1989,02,26),Gender = (Gender)0},
-                            new CustomUser {
-                                Email = "dlaydel3@pen.io",
-                                FName = "Daniëla",
-                                LName = "Laydel",
-                                Street = "Butterfield",
-                                HouseNumber = 304,
-                                ZipCode = null,
-                                City = "Bayan Hure",
-                                BirthDate = new DateTime(1995,11,16),Gender = (Gender)1},
-                            new CustomUser {
-                                Email = "bborsay4@rambler.ru",
-                                FName = "Jabari",
-                                LName = "Borsay",
-                                Street = "Coolidge",
-                                HouseNumber = 9068,
-                                ZipCode = null,
-                                City = "Xiluodu",
-                                BirthDate = new DateTime(1985,1,18),Gender =(Gender)0}
-                        };
+            //List<CustomUser> customUserTeacher = new List<CustomUser>
+            //            {
+            //                new CustomUser {
+            //                    Email = "mbritten0@msn.com",
+            //                    FName = "Marty",
+            //                    LName = "Britten",
+            //                    Street = "Sunnyside",
+            //                    HouseNumber = 9,
+            //                    ZipCode = "19-101",
+            //                    City = "Mońki",
+            //                    BirthDate = new DateTime(1991,05,13),Gender = (Gender)1},
+            //                new CustomUser {
+            //                    Email = "hcroot1@bbc.co.uk",
+            //                    FName = "Paula",
+            //                    LName = "Croot",
+            //                    Street = "Nevada",
+            //                    HouseNumber = 7,
+            //                    ZipCode = "CB4",
+            //                    City = "Church End",
+            //                    BirthDate = new DateTime(1981,12,13),Gender = (Gender)1},
+            //                new CustomUser {
+            //                    Email = "lwarby2@abc.net.au",
+            //                    FName = "Scooby",
+            //                    LName = "Warby",
+            //                    Street = "Luster",
+            //                    HouseNumber = 70,
+            //                    ZipCode = "59347-000",
+            //                    City = "Ouro Branco",
+            //                    BirthDate = new DateTime(1989,02,26),Gender = (Gender)0},
+            //                new CustomUser {
+            //                    Email = "dlaydel3@pen.io",
+            //                    FName = "Daniëla",
+            //                    LName = "Laydel",
+            //                    Street = "Butterfield",
+            //                    HouseNumber = 304,
+            //                    ZipCode = null,
+            //                    City = "Bayan Hure",
+            //                    BirthDate = new DateTime(1995,11,16),Gender = (Gender)1},
+            //                new CustomUser {
+            //                    Email = "bborsay4@rambler.ru",
+            //                    FName = "Jabari",
+            //                    LName = "Borsay",
+            //                    Street = "Coolidge",
+            //                    HouseNumber = 9068,
+            //                    ZipCode = null,
+            //                    City = "Xiluodu",
+            //                    BirthDate = new DateTime(1985,1,18),Gender =(Gender)0}
+            //            };
             //foreach (var cTeacher in customUserTeacher)
             //{
 
@@ -1373,18 +1373,18 @@ namespace EGakko_Web.Context
             #endregion
             #endregion
 
-            //var admin = new CustomUser
-            //{
-            //    Email = "admin@admin.com",
-            //    FName = "Admin",
-            //    LName = "Sudworth",
-            //    Street = "Admin Street",
-            //    HouseNumber = 15,
-            //    ZipCode = null,
-            //    City = "Antwerpen",
-            //    BirthDate = new DateTime(1992, 12, 18),
-            //    Gender = (Gender)1
-            //};
+            var admin = new CustomUser
+            {
+                Email = "admin@admin.com",
+                FName = "Admin",
+                LName = "Sudworth",
+                Street = "Admin Street",
+                HouseNumber = 15,
+                ZipCode = null,
+                City = "Antwerpen",
+                BirthDate = new DateTime(1992, 12, 18),
+                Gender = (Gender)1
+            };
             //admin.UserName = admin.Email;
             //IdentityResult idResult = await userManager.CreateAsync(admin, password);
             //if (idResult.Succeeded)
@@ -1392,7 +1392,7 @@ namespace EGakko_Web.Context
             //    IdentityRole role = await roleManager.FindByNameAsync("admin");
             //    userManager.AddToRoleAsync(admin, role.Name).Wait();
             //}
-            applicationDbContext.SaveChanges();
+            //applicationDbContext.SaveChanges();
 
 
         }
@@ -1407,28 +1407,28 @@ namespace EGakko_Web.Context
         {
 
 
-            IdentityResult result;
+            //IdentityResult result;
 
-            bool rolecheck = await roleManager.RoleExistsAsync("defaultUser");
-            if (!rolecheck)
-                result = await roleManager.CreateAsync(new IdentityRole("defaultUser"));
+            //bool rolecheck = await roleManager.RoleExistsAsync("defaultUser");
+            //if (!rolecheck)
+            //    result = await roleManager.CreateAsync(new IdentityRole("defaultUser"));
 
-            rolecheck = await roleManager.RoleExistsAsync("admin");
-            if (!rolecheck)
-                result = await roleManager.CreateAsync(new IdentityRole("admin"));
+            //rolecheck = await roleManager.RoleExistsAsync("admin");
+            //if (!rolecheck)
+            //    result = await roleManager.CreateAsync(new IdentityRole("admin"));
 
-            rolecheck = await roleManager.RoleExistsAsync("teacher");
-            if (!rolecheck)
-                result = await roleManager.CreateAsync(new IdentityRole("teacher"));
-
-
-            rolecheck = await roleManager.RoleExistsAsync("student");
-            if (!rolecheck)
-                result = await roleManager.CreateAsync(new IdentityRole("student"));
+            //rolecheck = await roleManager.RoleExistsAsync("teacher");
+            //if (!rolecheck)
+            //    result = await roleManager.CreateAsync(new IdentityRole("teacher"));
 
 
+            //rolecheck = await roleManager.RoleExistsAsync("student");
+            //if (!rolecheck)
+            //    result = await roleManager.CreateAsync(new IdentityRole("student"));
 
-            context.SaveChanges();
+
+
+            //context.SaveChanges();
         }
     }
 }

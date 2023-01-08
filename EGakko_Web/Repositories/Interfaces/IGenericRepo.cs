@@ -9,7 +9,7 @@ namespace EGakko_Web.Repositories
 {
     public interface IGenericRepo<T> where T : class
     {
-        Task<IEnumerable<T>> GetAll();
+        IEnumerable<T> GetAll();
         Task Add(T entity);
         void Update(T entity);
         void Delete(T entity);

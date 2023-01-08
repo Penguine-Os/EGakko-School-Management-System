@@ -32,7 +32,7 @@ namespace EGakko_Web
         {
             services.AddControllersWithViews();
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("BakerConnection")));
             services.AddDefaultIdentity<CustomUser>(options =>
             {
                 options.Password.RequireNonAlphanumeric = false;

@@ -19,7 +19,7 @@ namespace EGakko_Web.Repositories.Implementations
             _context = context;
         }
 
-        public async Task<IEnumerable<Teacher>> GetAllJoined(Expression<Func<Teacher, bool>> voorwaarden, params Expression<Func<Teacher, object>>[] includes)
+        public IEnumerable<Teacher> GetAllJoined(Expression<Func<Teacher, bool>> voorwaarden, params Expression<Func<Teacher, object>>[] includes)
         {
             IQueryable<Teacher> query = _context.Set<Teacher>();
             if (includes != null)
@@ -33,19 +33,19 @@ namespace EGakko_Web.Repositories.Implementations
             {
                 query = query.Where(voorwaarden);
             }
-            return  await query.ToListAsync();
+            return  query.ToList();
         }
 
-        public Task<IEnumerable<Teacher>> GetAllJoined(params Expression<Func<Teacher, object>>[] includes)
+        public IEnumerable<Teacher> GetAllJoined(params Expression<Func<Teacher, object>>[] includes)
         {
             return GetAllJoined(null, includes);
         }
-        public async Task<IEnumerable<TeacherSubject>> GetTeacherSubjects(int teacherId)
+        public IEnumerable<TeacherSubject> GetTeacherSubjects(int teacherId)
         {
-            return await _context.Set<TeacherSubject>()
+            return  _context.Set<TeacherSubject>()
                                     .Include(t => t.Teacher)
                                     .Include(t => t.Subject)
-                                    .Where(ts => ts.TeacherId == teacherId).ToListAsync();
+                                    .Where(ts => ts.TeacherId == teacherId).ToList();
         }
     }
 }

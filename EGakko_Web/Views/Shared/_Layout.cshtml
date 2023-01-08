@@ -11,7 +11,7 @@
     @if (SignInManager.IsSignedIn(User))
     {
         user = UserManager.FindByEmailAsync(User.Identity.Name).Result;
-        role = UserManager.GetRolesAsync(user).Result.FirstOrDefault();
+        role = UserManager.GetRolesAsync(user?? new CustomUser()).Result.FirstOrDefault();
     }
 
 }
